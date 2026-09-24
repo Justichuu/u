@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {mkdtempSync, readdirSync, rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -46,4 +47,32 @@ test('burn runs from another directory and removes only its own temporary files'
   assert.deepEqual(readdirSync(scratch),[],'temporary transformed source must be cleaned up');
   assert.match(p.stdout,/Authorship is not established/);
  } finally {rmSync(scratch,{recursive:true,force:true});}
+});
+
+// The 1821 lodge rule, kept as a check so it cannot rot back into decoration.
+// A rule of dots that ends in blank is a space somebody who was not in the room
+// can write a figure into later. If a line carries dots it must carry a figure,
+// and if it carries no figure it must carry no dots.
+test('no line in the provenance ledger rules to nothing', () => {
+  const md = readFileSync(new URL('../PROVENANCE.md', import.meta.url), 'utf8');
+  // \r?\n because a Windows working copy checks out CRLF even with eol=lf set.
+  const fence = md.match(/```text\r?\n([\s\S]*?)```/);
+  assert.ok(fence, 'the ruled ledger block is missing from PROVENANCE.md');
+  const lines = fence[1].split('\n').map(l => l.replace(/\r$/, '')).filter(l => l.trim());
+  assert.ok(lines.length > 3, 'the ledger is suspiciously short');
+  let ruled = 0, bare = 0;
+  for (const line of lines) {
+    const hasRule = line.includes('·');
+    const figure = line.replace(/·/g, '').trim().split(/\s+/).pop();
+    const hasFigure = hasRule && /^[10u]$/.test(figure);
+    if (hasRule) {
+      assert.ok(hasFigure, `a rule of dots ends in nothing: ${JSON.stringify(line)}`);
+      ruled++;
+    } else {
+      assert.ok(!/\s[10u]$/.test(line), `a figure with no rule to it: ${JSON.stringify(line)}`);
+      bare++;
+    }
+  }
+  assert.ok(bare >= 1, 'no bare line present, so the rule is not being demonstrated');
+  assert.equal(ruled + bare, lines.length);
 });

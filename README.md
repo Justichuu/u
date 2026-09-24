@@ -133,7 +133,7 @@ failure was seen but at least one runtime was unavailable. Missing is `u`;
 an installed runtime that exits with an error is `0`.
 
 [W] Continuation checked 24 September 2026 on Windows: Node 26.7.0, Python
-3.14.7 and Git's POSIX shell produced the same tape. All 23 Node tests passed,
+3.14.7 and Git's POSIX shell produced the same tape. All 24 Node tests passed,
 including failed-runtime classification, use from another directory, cleanup,
 input validation, timed display return, receipt tampering, audio cancellation
 before resume and local-only voice selection. The exact checker

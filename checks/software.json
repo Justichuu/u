@@ -1,7 +1,7 @@
 {
-  "at": "2026-09-24T03:30:40.758385+00:00",
+  "at": "2026-09-24T03:35:59.109600+00:00",
   "state": "1",
-  "scope": "23 Node tests; 3 runtime ports; original and downloaded browser HTML in Chromium, Firefox and WebKit, two viewport sizes each.",
+  "scope": "24 Node tests; 3 runtime ports; original and downloaded browser HTML in Chromium, Firefox and WebKit, two viewport sizes each.",
   "files": {
     "u.mjs": "22261aa453be5ff5d68aece6d3be42def968c74465870300e42ce180ccc34c08",
     "u.js": "996e8c33fd3f10e905024ff7172205f2fa35361c062d4b53e3abed5d5350984c",
@@ -12,7 +12,7 @@
     "browser.html": "6494da469f66ec5c24a814e9683e2ad461431aa0e41bde24fc9587c80abdcfc7",
     "run.html": "701c670ebd998b9cbb15abe8dccdcdd7cc3f1e01f09a18c9748797cdc19a40d6",
     "build-browser.mjs": "ea0a6b35bdc33c44ce627f5d41b65df262ee5053095a77c32f1ea0706d5fa172",
-    "test/logic.test.mjs": "0c2720fd5c7eb91c238c1617b4db37371feb8f9afa897485cc25db886b79f7df",
+    "test/logic.test.mjs": "a49f7343b22d5058a757b496a503455bfc7de5638955bd443a687c2e132c9f7f",
     "test/u.test.mjs": "5abd9af963b54b270ca2a36dbacef18be02e4c5475335938209b01db7760d733",
     "LICENSE": "712abee1314f4537fab2bf35508b693b9f12c170b336b175fc701ce7d8144dbf",
     "audio.mjs": "10018a367b56866cd9c088668b3e3a55ce1d734cd464378438d2dbfc135c654a",
