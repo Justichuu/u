@@ -41,7 +41,7 @@ carries both.
 
 - A **declared** fingerprint names people. Delete the declaration from a stolen
   copy and it changes. Witnessed: replacing the contributor record in `u.mjs`
-  moves the fingerprint from `feba63e1abb8a00e` to `d344044605c6093b`.
+  moves the fingerprint from `feba63e1abb8a00e` to another prefix. Measured on this tree: an empty contributor list yields `5b48ac9fd5466760`.
 - A **behavioural** fingerprint cannot name anybody, and cannot be removed from
   a working copy either. Witnessed: `node burn.mjs` deletes every comment and
   renames every function, leaves zero owner words, and the tape is unchanged.
