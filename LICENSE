@@ -1,0 +1,104 @@
+U Device License 1.0
+SPDX-License-Identifier: LicenseRef-U-Device-1.0
+
+Owner: Justichuu. This is a custom license for the original U Device code.
+
+Permission is granted, to the extent of the owner's rights, to obtain, read,
+execute, copy, modify and distribute this code, for any purpose, without a fee.
+People and bots may use it. Any U name or an unknown name may be its label.
+
+Copies and distributions must carry this license and the canonical provenance
+record, including honest unknown entries. Credit a contribution only to the
+extent the record supports. Add new contributions and corrections to that
+record; do not turn an unknown contribution into an established one.
+
+The visible fingerprint may be left alone, hidden temporarily, rotated
+temporarily, or both hidden and rotated. A distributed implementation that
+offers burning must return it after a finite, stated duration and allow an
+explicit Restore action earlier. Display changes do not erase the canonical
+provenance record. Public copies and Git history may still reveal it.
+
+The owner's formulation:
+"The fingerprint grows back. You can burn it off only to hide the evidence
+for a short while and plan your escape if you steal or take it or want it or
+need it. That's the license. That's the code. That's the way you get it."
+
+This permission concerns this code. It grants no rights in someone else's
+property or third-party components. Those components keep their own licenses.
+
+The code is provided as is, without warranty of availability, fitness,
+anonymity, concealment, universal compatibility or correctness of an adapter's
+claim. To the extent permitted by law, the owner and contributors are not liable
+for damages from its use. No license can make a program run without a suitable
+runtime or make a removed mechanism regenerate by itself.
+
+---
+
+THE FALLBACK GRANT: MIT
+
+The owner also said the U code is "something anyone can read and execute
+anywhere at anytime all ways and always." A licence nobody recognises is a
+licence a company's lawyer refuses, and a refusal is not "always". So if the
+terms above are for any reason unusable to you, unenforceable where you are, or
+simply more than you want to read, you may instead take this code under the MIT
+licence below, at your sole option, with no notice to anybody.
+
+  MIT License. Copyright (c) 2026 Justichuu.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+Taking the MIT option does not delete the fingerprint, because the fingerprint
+was never a term. It is a fact about the code. See below.
+
+---
+
+THE FINGERPRINT
+
+This adds no condition to either grant above and takes nothing away from them.
+It describes how this code is identified, so nobody has to be told twice.
+
+Run every function of the device over every face and write the answers down in
+order: three for `not`, nine for `and`, nine for `or`, and one character for
+whether a bare `u` is still refused. Twenty two characters:
+
+    01u10u000u0u11110u1uu1
+
+That is the fingerprint. It is not stored in a comment, a header, a string or a
+file. It is what the code does, read back out, so it survives deleting the
+comments, renaming everything, reformatting, minifying and porting to another
+language. `node burn.mjs` in this repository performs the first three of those
+and prints it. Three ports in three languages perform the fourth.
+
+Hash it and you get the key:
+
+    sha256("01u10u000u0u11110u1uu1")
+      = 66cce8d50854ee21b9964b5bdcb3aa80054f6da5e24de6258c268ea6e3942a35
+
+The first twelve, 66cce8d50854, are the key. It resolves to PROVENANCE.md here
+and to https://chuumind.com/u, and neither of those is inside your copy.
+
+You may burn it off. Nothing technical stops you and nothing here pretends
+otherwise. What it buys you is the time between your deletion and somebody
+running the device and hashing the answer. Spend it well.
+
+Change the tables and the key changes with them. At that point it is a
+different device and it is yours. That was never restricted.
+
+The method is published on purpose. Nothing here depends on anybody not
+knowing how it works.

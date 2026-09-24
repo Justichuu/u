@@ -1,0 +1,27 @@
+{
+  "at": "2026-09-24T01:09:27.576135+00:00",
+  "state": "1",
+  "scope": "14 node:test cases passed on Windows Node v26.7.0; example returned original text and verified its supplied receipt chain.",
+  "files": {
+    "u.mjs": "22261aa453be5ff5d68aece6d3be42def968c74465870300e42ce180ccc34c08",
+    "u.js": "996e8c33fd3f10e905024ff7172205f2fa35361c062d4b53e3abed5d5350984c",
+    "u.py": "02a5ce92e4ebad390696887859ba59b78d0e9884bc955c15ff087f71f974ab09",
+    "u.sh": "73a41e2eaa59ab96e951e112eb6fa0213dfaa48f6a493612e52092c4339b39dd",
+    "test/u.test.mjs": "5abd9af963b54b270ca2a36dbacef18be02e4c5475335938209b01db7760d733",
+    "test/logic.test.mjs": "a077b3deef34199034da573dea2ccac5b1b0df00f565aaf66e0e7f65b4a3df5b",
+    "LICENSE": "24c91ed9934d9f6eec159fe4ff2309cbfcce279b0d01f066ca5ad98e25a07cf2"
+  },
+  "independentCheck": "node:crypto SHA-256 compared with Web Crypto for known canonical JSON.",
+  "unmeasured": [
+    "Physical sensation",
+    "Unknown adapters",
+    "Every runtime and future version",
+    "Anonymity or erasure",
+    "Independent contributor identity authentication"
+  ],
+  "additional": [
+    "The logic table matched in Windows Node 26.7.0, Python 3.14.7 and Git POSIX shell with an explicit executable path.",
+    "The same table matched in WSL Python 3 and sh. Invalid-input rejection checked in both.",
+    "The missing-port fixture returned aggregate U and exit 2. The actual burn transformation returned the expected finite table."
+  ]
+}

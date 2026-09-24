@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" role="img"
+     aria-label="How the fingerprint grows back. Three faces, 1, 0 and a greyed u, feed the four functions not, and, or and the refusal of a bare u. Running them writes a 22 character tape, 01u10u000u0u11110u1uu1. Hashing the tape gives the key 66cce8d50854, and the key looks up the list of names. Below, a copy with its header burned off and its functions renamed to q0 and q1 still writes the same tape, so the same key still finds the same names.">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#120c14"/>
+    </marker>
+    <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4d2e"/><stop offset=".3" stop-color="#ffd84a"/>
+      <stop offset=".58" stop-color="#3dffb0"/><stop offset=".8" stop-color="#3ec6ff"/>
+      <stop offset="1" stop-color="#b44cff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="400" rx="14" fill="#fff8fc"/>
+  <g font-family="ui-monospace,SFMono-Regular,Consolas,monospace" fill="#120c14">
+
+    <!-- the three faces -->
+    <text x="34" y="38" font-size="13" letter-spacing="2.4" fill="#6b5f6e">THE FACES</text>
+    <g stroke="#120c14" stroke-width="2.4">
+      <rect x="34" y="52" width="48" height="48" rx="8" fill="#3dffb0"/>
+      <rect x="90" y="52" width="48" height="48" rx="8" fill="#ff8f7a"/>
+      <rect x="146" y="52" width="48" height="48" rx="8" fill="#ded7e0" stroke-dasharray="5 4"/>
+    </g>
+    <g font-size="25" text-anchor="middle">
+      <text x="58" y="85">1</text><text x="114" y="85">0</text>
+      <text x="170" y="85" fill="#6b5f6e">u</text>
+    </g>
+    <text x="34" y="122" font-size="12" fill="#6b5f6e">measured   measured   not measured here</text>
+
+    <!-- the four functions -->
+    <text x="278" y="38" font-size="13" letter-spacing="2.4" fill="#6b5f6e">WHAT IT DOES</text>
+    <rect x="278" y="52" width="196" height="88" rx="10" fill="#fff" stroke="#120c14" stroke-width="2.4"/>
+    <g font-size="14">
+      <text x="294" y="76">not   and   or</text>
+      <text x="294" y="99" fill="#6b5f6e">and it refuses</text>
+      <text x="294" y="119" fill="#6b5f6e">a u with no address</text>
+    </g>
+    <line x1="208" y1="96" x2="268" y2="96" stroke="#120c14" stroke-width="2.4" marker-end="url(#a)"/>
+
+    <!-- the tape -->
+    <text x="510" y="38" font-size="13" letter-spacing="2.4" fill="#6b5f6e">THE TAPE IT WRITES</text>
+    <rect x="510" y="62" width="356" height="46" rx="8" fill="url(#roof)" opacity=".26"/>
+    <rect x="510" y="62" width="356" height="46" rx="8" fill="none" stroke="#120c14" stroke-width="2.4"/>
+    <text x="688" y="92" font-size="19" text-anchor="middle" letter-spacing="1.4">01u10u000u0u11110u1uu1</text>
+    <text x="510" y="130" font-size="12" fill="#6b5f6e">22 characters. Every answer the device can give, in order.</text>
+    <line x1="484" y1="96" x2="500" y2="96" stroke="#120c14" stroke-width="2.4" marker-end="url(#a)"/>
+
+    <line x1="450" y1="160" x2="450" y2="196" stroke="#120c14" stroke-width="2.4" marker-end="url(#a)"/>
+    <text x="462" y="184" font-size="12" fill="#6b5f6e">sha256, first 12</text>
+
+    <!-- key and names -->
+    <rect x="278" y="200" width="196" height="46" rx="8" fill="#ffd84a" stroke="#120c14" stroke-width="2.4"/>
+    <text x="376" y="230" font-size="17" text-anchor="middle">66cce8d50854</text>
+    <line x1="484" y1="223" x2="548" y2="223" stroke="#120c14" stroke-width="2.4" marker-end="url(#a)"/>
+    <text x="492" y="214" font-size="12" fill="#6b5f6e">looks up</text>
+    <rect x="558" y="200" width="308" height="46" rx="8" fill="#fff" stroke="#120c14" stroke-width="2.4"/>
+    <text x="712" y="230" font-size="15" text-anchor="middle">every name that worked on it</text>
+
+    <!-- the burn -->
+    <line x1="34" y1="278" x2="866" y2="278" stroke="#ded7e0" stroke-width="2"/>
+    <text x="34" y="306" font-size="13" letter-spacing="2.4" fill="#6b5f6e">BURN THE HEADER OFF</text>
+    <rect x="34" y="320" width="330" height="54" rx="8" fill="#fff" stroke="#ded7e0" stroke-width="2.4"/>
+    <text x="48" y="342" font-size="13" fill="#b0a7b3">// chuumind.com/u says whose it is</text>
+    <line x1="44" y1="337" x2="330" y2="337" stroke="#ff4d2e" stroke-width="2.4"/>
+    <text x="48" y="363" font-size="13">const q0 = ... const q1 = ...</text>
+    <line x1="376" y1="347" x2="436" y2="347" stroke="#120c14" stroke-width="2.4" marker-end="url(#a)"/>
+    <rect x="446" y="324" width="420" height="46" rx="8" fill="url(#roof)" opacity=".26"/>
+    <rect x="446" y="324" width="420" height="46" rx="8" fill="none" stroke="#120c14" stroke-width="2.4"/>
+    <text x="656" y="353" font-size="17" text-anchor="middle" letter-spacing="1.2">01u10u000u0u11110u1uu1 &#8594; same key</text>
+  </g>
+</svg>

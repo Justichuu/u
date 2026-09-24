@@ -1,0 +1,14 @@
+{
+  "name": "u",
+  "version": "1.0.0",
+  "description": "The U device. Three faces: 1, 0 and u. Four functions you can paste anywhere, and a device protocol on top. Its fingerprint is computed from what the code does, so it grows back after you delete it.",
+  "license": "LicenseRef-U-Device-1.0 OR MIT",
+  "type": "module",
+  "main": "u.js",
+  "exports": { ".": "./u.js", "./protocol": "./u.mjs" },
+  "scripts": {
+    "test": "node verify.mjs && node --test \"test/*.test.mjs\"",
+    "burn": "node burn.mjs"
+  },
+  "keywords": ["u-device", "universal-device", "unknown-device", "three-valued-logic", "kleene", "provenance", "fingerprint"]
+}
