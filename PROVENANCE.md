@@ -2,7 +2,9 @@
 
 The record the key `66cce8d50854` opens. It is also published at
 [chuumind.com/u](https://chuumind.com/u), so a copy of this repository is never
-the only place it exists.
+the only place it exists. Independent unknown witness, 24 September 2026:
+that URL returned HTTP 404 on checkout of this commit; matching `u.mjs` was
+found at `/assets/u/u.mjs` instead.
 
 A face on every line. `1` measured and it holds, `0` measured and it does not,
 `u` nobody measured it. A credit with no evidence behind it is worth less than
@@ -62,3 +64,19 @@ face up it.
 Git history, version tags and release checksums are different kinds of
 evidence. None of them alone proves every claim here forever. A past
 observation may later become uncertain without erasing the earlier record.
+
+
+## Independent witness (protocol)
+
+Unknown independent witness. No prior relationship to the authors. Fresh clone
+at `e5e89be4103f14b017a6b065ca86cdd7df42c466`. Machine record:
+`checks/independent-witness-protocol.json`.
+
+| Claim | Face | What was measured |
+|---|---|---|
+| Declared fingerprint prefix `feba63e1abb8a00e` | 1 | `createU().fingerprint()` on this checkout |
+| Contributor replacement → prefix `d344044605c6093b` | 0 | Not reproduced with empty/altered records tried here |
+| Tape key `66cce8d50854` | 1 | sha256 of published tape |
+| `chuumind.com/u` publishes this record | 0 | HTTP 404 |
+| Same `u.mjs` on site assets | 1 | `/assets/u/u.mjs` hash matches |
+| Face-`u` tool rows authored bytes | u | Names in prose only; faces stay `u` |
