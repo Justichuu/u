@@ -1,0 +1,17 @@
+{
+  "witness": "independent-unknown",
+  "at": "2026-09-24T01:55:00Z",
+  "repo": "https://github.com/Justichuu/u",
+  "commit": "e5e89be4103f14b017a6b065ca86cdd7df42c466",
+  "declared_fingerprint_full": "feba63e1abb8a00e0b09276d8e557df6fed50d48b17554f89fcd63289335aa8f",
+  "declared_fingerprint_prefix": "feba63e1abb8a00e",
+  "claimed_replacement_prefix": "d344044605c6093b",
+  "replacement_reproduced": false,
+  "chuumind_u_http": 404,
+  "site_u_mjs_sha256": "22261aa453be5ff5d68aece6d3be42def968c74465870300e42ce180ccc34c08",
+  "checkout_u_mjs_sha256": "22261aa453be5ff5d68aece6d3be42def968c74465870300e42ce180ccc34c08",
+  "face_u_rows_authored_bytes": false,
+  "notes": [
+    "Blank-slate protocol verifier. Did not promote any face u→1."
+  ]
+}
