@@ -2,7 +2,9 @@
 
 The record the key `66cce8d50854` opens. It is also published at
 [chuumind.com/u](https://chuumind.com/u), so a copy of this repository is never
-the only place it exists.
+the only place it exists. Independent unknown witness, 24 September 2026:
+that URL returned HTTP 404 on checkout of this commit; matching `u.mjs` was
+found at `/assets/u/u.mjs` instead.
 
 A face on every line. `1` measured and it holds, `0` measured and it does not,
 `u` nobody measured it. A credit with no evidence behind it is worth less than
@@ -12,8 +14,8 @@ quietly promoted.
 | Who | Face | What it did, and how that is known |
 |---|---|---|
 | **Justichuu** | 1 | The person. Wrote the rules this implements, the licence formulation, and the instruction to publish. His own words, 23 September 2026. |
-| OpenAI Codex | 1 | The device protocol in `u.mjs`, `STANDARD.md`, the licence text, the test suite, and the input validation now in all three ports. Observed 23 September 2026. |
-| Claude Opus 5 | 1 | The three logic ports, the behavioural tape and key, `burn.mjs`, the verifier, the diagram, and the chuumind.com pages. Observed 23 September 2026. |
+| OpenAI Codex | u | Named in the commit message, `PROVENANCE.md`, and the `u.mjs` contributor record. Sole git author of this tree is Justichuu; no co-author trailer. Independent unknown witness 24 September 2026: not proved from repository bytes alone. |
+| Claude Opus 5 | u | Named in the commit message and `PROVENANCE.md`. `u.mjs` already records Claude as U for that module. No co-author trailer. Independent unknown witness 24 September 2026: not proved from repository bytes alone. |
 | GitHub Copilot | u | Named in the surrounding work. No contribution to these files was observed. Settled by the owner saying so. |
 | ChatGPT | u | Named as a tool in use. Not observed on these files. |
 | Cursor | u | Same. |
@@ -62,3 +64,34 @@ face up it.
 Git history, version tags and release checksums are different kinds of
 evidence. None of them alone proves every claim here forever. A past
 observation may later become uncertain without erasing the earlier record.
+
+
+## Independent witness (behavioural)
+
+Unknown independent witness. No prior relationship to the authors. Fresh clone
+of `Justichuu/u` at `e5e89be4103f14b017a6b065ca86cdd7df42c466` on 24 September
+2026. Machine record: `checks/independent-witness.json`.
+
+| Claim | Face | What was measured |
+|---|---|---|
+| Ports print tape `01u10u000u0u11110u1uu1` | 1 | `node u.js`, `python3 u.py`, `sh u.sh` |
+| `sha256(tape)` starts with `66cce8d50854` | 1 | `printf %s 01u10u000u0u11110u1uu1 \| sha256sum` |
+| Stock `node burn.mjs` on Linux Node 22 | 0 | Path strip drops leading `/`; scratch module not found |
+| Burn transform with correct path still reprints tape | 1 | Same rename/filter as `burn.mjs` |
+| OpenAI Codex / Claude Opus 5 face 1 from bytes alone | u | Sole `git` author is Justichuu; demoted above |
+
+
+## Independent witness (protocol)
+
+Unknown independent witness. No prior relationship to the authors. Fresh clone
+at `e5e89be4103f14b017a6b065ca86cdd7df42c466`. Machine record:
+`checks/independent-witness-protocol.json`.
+
+| Claim | Face | What was measured |
+|---|---|---|
+| Declared fingerprint prefix `feba63e1abb8a00e` | 1 | `createU().fingerprint()` on this checkout |
+| Contributor replacement → prefix `d344044605c6093b` | 0 | Not reproduced with empty/altered records tried here |
+| Tape key `66cce8d50854` | 1 | sha256 of published tape |
+| `chuumind.com/u` publishes this record | 0 | HTTP 404 |
+| Same `u.mjs` on site assets | 1 | `/assets/u/u.mjs` hash matches |
+| Face-`u` tool rows authored bytes | u | Names in prose only; faces stay `u` |
