@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-24T03:21:49.832846+00:00",
+  "at": "2026-09-24T03:30:40.758385+00:00",
   "state": "1",
   "scope": "23 Node tests; 3 runtime ports; original and downloaded browser HTML in Chromium, Firefox and WebKit, two viewport sizes each.",
   "files": {
@@ -9,8 +9,8 @@
     "u.sh": "73a41e2eaa59ab96e951e112eb6fa0213dfaa48f6a493612e52092c4339b39dd",
     "verify.mjs": "4e269f30f836f37ea893e9e68c08f40d022d040cf226a38c960bd47ba1ffd7de",
     "burn.mjs": "c840d2ace98870c868979168ca7d9bcba7bc5ecdbd7a5d37b2333ccdc0d32ec0",
-    "browser.html": "3a44f981b6f4a8568e47050b0bab3b0808c5b5b93639e6e09814e160aec774f2",
-    "run.html": "996941661ccae71c648051dbaa81abb4d6fe805281f53fa84db401241e32351a",
+    "browser.html": "6494da469f66ec5c24a814e9683e2ad461431aa0e41bde24fc9587c80abdcfc7",
+    "run.html": "701c670ebd998b9cbb15abe8dccdcdd7cc3f1e01f09a18c9748797cdc19a40d6",
     "build-browser.mjs": "ea0a6b35bdc33c44ce627f5d41b65df262ee5053095a77c32f1ea0706d5fa172",
     "test/logic.test.mjs": "0c2720fd5c7eb91c238c1617b4db37371feb8f9afa897485cc25db886b79f7df",
     "test/u.test.mjs": "5abd9af963b54b270ca2a36dbacef18be02e4c5475335938209b01db7760d733",
