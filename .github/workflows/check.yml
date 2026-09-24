@@ -16,4 +16,6 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node checks/verify-sources.mjs
       - run: npm test
+        env:
+          U_PYTHON: python3
       - run: node example.mjs

@@ -8,6 +8,7 @@
 
 import { writeFileSync, readFileSync, rmSync } from "node:fs";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { KNOWN } from "./u.js";
 
 const source = readFileSync(new URL("./u.js", import.meta.url), "utf8");
@@ -46,7 +47,7 @@ const scratch = new URL("./burned.tmp.mjs", import.meta.url);
 writeFileSync(scratch, burned);
 
 try {
-  const got = execFileSync("node", [decodeURIComponent(scratch.pathname).replace(/^\//, "")], { encoding: "utf8" }).trim();
+  const got = execFileSync(process.execPath, [fileURLToPath(scratch)], { encoding: "utf8" }).trim();
   const left = (burned.match(/chuumind|Justichuu|fingerprint|owner/gi) || []).length;
 
   console.log("\nthe burned copy, in full\n");
