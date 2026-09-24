@@ -1,0 +1,25 @@
+{
+  "witness": "independent-unknown",
+  "at": "2026-09-24T01:54:17Z",
+  "repo": "https://github.com/Justichuu/u",
+  "commit": "e5e89be4103f14b017a6b065ca86cdd7df42c466",
+  "runtime": {
+    "os": "linux x64",
+    "node": "v22.14.0",
+    "python3": "3.12.3",
+    "python_on_path": false
+  },
+  "outcomes": {
+    "behavioural_tape": "1",
+    "tape_key_prefix": "1",
+    "stock_burn_mjs": "0",
+    "burn_semantics_path_fixed": "1",
+    "openai_codex_authorship_from_bytes": "u",
+    "claude_opus_5_authorship_from_bytes": "u",
+    "justichuu_git_author": "1"
+  },
+  "notes": [
+    "Blank-slate verifier. Did not promote any face u→1.",
+    "Demoted OpenAI Codex and Claude Opus 5 from 1→u: prose credit only."
+  ]
+}

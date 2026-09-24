@@ -14,12 +14,22 @@ import { u, not, and, or, tape, KNOWN } from "./u.js";
 
 const KEY = "66cce8d50854";
 const cwd = fileURLToPath(new URL('.', import.meta.url));
-// Both interpreters are found through one documented override each, so a
-// machine that spells them differently is configurable rather than unsupported.
+// Prefer python3 on machines where `python` is absent (common on Linux CI).
+// U_PYTHON / U_SHELL still override when set.
+function resolveCmd(envName, candidates) {
+  if (process.env[envName]) return process.env[envName];
+  for (const cmd of candidates) {
+    try {
+      execFileSync(cmd, ["--version"], { stdio: "ignore" });
+      return cmd;
+    } catch {}
+  }
+  return candidates[0];
+}
 const ports = [
   ["u.js  node", [process.execPath, ["u.js"]]],
-  ["u.py  python", [process.env.U_PYTHON || "python", ["u.py"]]],
-  ["u.sh  sh", [process.env.U_SHELL || "sh", ["u.sh"]]],
+  ["u.py  python", [resolveCmd("U_PYTHON", ["python3", "python"]), ["u.py"]]],
+  ["u.sh  sh", [resolveCmd("U_SHELL", ["sh"]), ["u.sh"]]],
 ];
 
 let bad = 0, grey = 0;
