@@ -9,9 +9,11 @@
 
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
+import { fileURLToPath } from "node:url";
 import { u, not, and, or, tape, KNOWN } from "./u.js";
 
 const KEY = "66cce8d50854";
+const cwd = fileURLToPath(new URL('.', import.meta.url));
 // Both interpreters are found through one documented override each, so a
 // machine that spells them differently is configurable rather than unsupported.
 const ports = [
@@ -31,13 +33,14 @@ console.log("\nthe tape, once per runtime\n");
 for (const [name, [cmd, args]] of ports) {
   let got;
   try {
-    const out = execFileSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    const out = execFileSync(cmd, args, { cwd, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
     got = (out.match(/tape\s+(\S+)/) || [])[1];
   } catch (err) {
     // A runtime that is not installed is u, not 0. It was not measured here,
     // and it is counted as not measured rather than quietly skipped. A grey
     // that does not reach the last line is the same lie as a false green.
-    say("u", name, `not on this machine: ${cmd} did not run`);
+    if (err.code === 'ENOENT') say("u", name, "runtime not found; provide its path with U_PYTHON or U_SHELL and rerun");
+    else say("0", name, `runtime failed: ${err.code || 'exit ' + err.status}`);
     continue;
   }
   say(got === KNOWN ? "1" : "0", name, got);
@@ -61,5 +64,5 @@ const runtimes = ports.length, measured = runtimes - grey;
 const coverage = `${measured} of ${runtimes} runtimes measured` + (grey ? `, ${grey} u` : "");
 if (bad) console.log(`\n0  ${bad} failed. ${coverage}\n`);
 else if (grey) console.log(`\nu  nothing failed, and not everything was looked at. ${coverage}\n`);
-else console.log(`\n1  the device is itself. ${coverage}\n`);
+else console.log(`\n1  the listed runtimes agree on this finite table. ${coverage}\n`);
 process.exit(bad ? 1 : grey ? 2 : 0);

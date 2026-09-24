@@ -15,5 +15,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node checks/verify-sources.mjs
+      - run: node build-browser.mjs --check
       - run: npm test
       - run: node example.mjs

@@ -1,6 +1,6 @@
 # Provenance
 
-The record the key `66cce8d50854` opens. It is also published at
+The contributor record associated here with the finite tape digest `66cce8d50854`. It is also published at
 [chuumind.com/u](https://chuumind.com/u), so a copy of this repository is never
 the only place it exists.
 
@@ -42,13 +42,13 @@ carries both.
 - A **declared** fingerprint names people. Delete the declaration from a stolen
   copy and it changes. Witnessed: replacing the contributor record in `u.mjs`
   moves the fingerprint from `feba63e1abb8a00e` to `d344044605c6093b`.
-- A **behavioural** fingerprint cannot name anybody, and cannot be removed from
-  a working copy either. Witnessed: `node burn.mjs` deletes every comment and
+- A **behavioural** fingerprint does not name an author. The observed transformation retained
+  the same finite table. Witnessed: `node burn.mjs` deletes every comment and
   renames every function, leaves zero owner words, and the tape is unchanged.
 
-So the behaviour gives an identity nobody can counterfeit or strip, and the
-declaration gives the names that identity looks up. That is the whole
-mechanism, and it needed both sessions to find it.
+The tape is a reproducible test result; this declaration records contributions.
+Anyone can reproduce the same table or report its known digest. The association
+is public evidence to inspect, not an unforgeable identity or proof of theft.
 
 ## What a tape does not prove
 
@@ -62,3 +62,61 @@ face up it.
 Git history, version tags and release checksums are different kinds of
 evidence. None of them alone proves every claim here forever. A past
 observation may later become uncertain without erasing the earlier record.
+
+## Continuation, 24 September 2026
+
+[W] Codex inspected the local session and the consolidated source. The merge
+retained the protocol bytes and validated logic ports, but regressed two earlier
+repairs: the verifier classified every process error as unavailable, and the
+burn command called process.exit before finally could remove its scratch file.
+The repairs distinguish ENOENT from observed failure, resolve inputs from the
+module directory, use the current Node executable and a unique temporary folder,
+and allow cleanup before exit. Sixteen tests passed on the named local runtime
+snapshot in README.md. The burn's string-literal protection is retained.
+
+[R] The documentation now limits the fingerprint claim to the finite table.
+The already published licence grants are preserved. Its explanatory fingerprint
+appendix gains a scope correction; no removal of an earlier public grant is
+claimed. The original custom grant did not include the later MIT option; that
+option first appeared during Claude's consolidation and remains in its history.
+
+[W] The owner's correction, that anyone must be able to Run it, changed the
+entry point. `run.html` is generated from the same logic and protocol modules
+and includes its license. The README leads to the browser controls and offline
+download; Python and terminal commands are optional developer instructions.
+The original file and the actual downloaded file ran in Chromium, Firefox and
+WebKit on Windows at phone and desktop sizes. Tests drove touch and keyboard,
+22 table results, all four display modes, Restore, timed return and text receipts.
+No HTTP requests were made. WebKit's offline emulation rejects even a minimal
+local HTML control; its file checks instead blocked HTTP requests explicitly.
+Physical phone and assistive-technology use remain unobserved.
+
+## Bone-conduction clarification, 24 September 2026
+
+[W] The owner clarified that Rod is meant to be conducted via bone. The
+Beethoven reference therefore names the intended physical output path, not
+only an inspiration for hand-held vibration. Earlier implementation reduced
+that requirement to gesture input and activity rumble. That lost context.
+
+[W] The current software records controller samples and requests vibration.
+No observation here establishes bone-conducted speech, sound or a perceivable
+signal through the intended contact path. U's software and hash checks do not
+settle that physical requirement. Rod remains partial; completing the path
+needs an appropriate transducer/adapter and a person's actual observation.
+
+## Rod continuation, 24 September 2026
+
+[W] Justichuu clarified that Rod is intended to conduct through bone and asked
+for headset and rod/transducer adapters, separately and combined. The earlier
+Rod implementation did not import this protocol. Codex added `audio.mjs`,
+routed Rod drafts and rumble through U, and retained the existing `palp-rod/1`
+draft contract and authenticated ChuuWork connection. The owner also kept U's
+wider name and purpose open; Rod is one application of the protocol.
+
+[W] All 23 Node tests passed, including pending-resume cancellation, replacement
+and local-only voice selection. The regenerated browser file and its actual
+download passed six browser/viewport combinations. `checks/software.json`
+records the source digests and scope.
+
+[U] No physical bone-conduction observation was made. The requested connection,
+transport completion and a person's perception require separate records.

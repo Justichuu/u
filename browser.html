@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Run U</title>
+<link rel="icon" href="data:,">
+<style>
+  :root{font:18px/1.55 system-ui,sans-serif;color:#25252b;background:#f4f1ea;color-scheme:light}
+  *{box-sizing:border-box}body{max-width:48rem;margin:auto;padding:clamp(16px,4vw,40px)}
+  h1{font-size:2.4rem;line-height:1.1;margin:0}h2{font-size:1.2rem;margin:0 0 12px}p{margin:12px 0}
+  a{color:inherit;text-underline-offset:3px}header,section,details{margin:0 0 24px}
+  section{padding:20px;border:1px solid #86838c;border-radius:12px;background:#fffdf8}
+  label{display:block;margin:10px 0}input,select,button{font:inherit;color:inherit;border:1px solid #76717e;border-radius:6px;min-height:44px;padding:8px 12px;background:#fffdf8;max-width:100%}
+  input{width:100%}button{cursor:pointer}button:disabled{opacity:.65;cursor:default}
+  button.primary{background:#25252b;color:#fffdf8}.actions,.inputs{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+  .inputs label{flex:1;min-width:90px}.inputs select{width:100%}
+  [hidden]{display:none!important}:focus-visible{outline:3px solid #70449d;outline-offset:3px}
+  [data-face]{border-inline-start:5px solid #86838c;padding-inline-start:12px}
+  [data-face="1"]{border-color:#ba3737}[data-face="0"]{border-color:#356ac3}
+  code,pre{font: .85rem/1.5 ui-monospace,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;word-break:break-word}
+  summary{cursor:pointer;min-height:44px;padding:8px 0}.small{font-size:.88rem}.answer{font-size:1.35rem;font-weight:650}
+  @media(prefers-color-scheme:dark){:root{color:#f4f1ea;background:#17171b;color-scheme:dark}section,input,select,button{background:#25252b}button.primary{background:#f4f1ea;color:#25252b}}
+  @media(forced-colors:active){[data-face]{border-color:CanvasText}button.primary{background:ButtonFace;color:ButtonText}}
+</style>
+<body>
+<header><h1>Run U</h1><p>Universal, unknown, unclassified. The name stays open. Try three values and a returning fingerprint.</p>
+<div class="actions"><button id="download" disabled>Download for offline use</button><a href="https://github.com/Justichuu/u">Source &amp; credit</a></div>
+<p class="small">No account or installation. This file makes no network requests. Links open only when you choose them. <a href="https://chuumind.com/tools/misc/rod/">Rod uses U for gesture, vibration and audio.</a></p></header>
+<noscript><p data-face="u">U: scripts are disabled. Enable JavaScript in your browser to run this file. Its source and license are readable below.</p></noscript>
+<section aria-labelledby="logic-title"><h2 id="logic-title">Combine three values</h2>
+<p class="small">1 means holds, 0 means does not hold, u means unsettled. You supply the observations; the code combines the labels.</p>
+<div class="inputs"><label>First value<select id="first"><option>1</option><option>0</option><option selected>u</option></select></label>
+<label>Operation<select id="operation"><option value="not">NOT</option><option value="and">AND</option><option value="or">OR</option></select></label>
+<label id="second-label" hidden>Second value<select id="second"><option>1</option><option>0</option><option>u</option></select></label></div>
+<label id="reason-label">What observation would settle u?<input id="reason" value="Measure the named condition." autocomplete="off"></label>
+<button id="combine" class="primary" disabled>Run these values</button>
+<p id="result" class="answer" role="status" data-face="u">U: waiting for this browser to run the code.</p>
+<details><summary>Run the complete finite table</summary><button id="check" disabled>Run 22 checks</button>
+<p id="checks" role="status" data-face="u">U: the checks have not run.</p><pre id="tape"></pre>
+<p class="small">Three NOT results, nine AND results, nine OR results and refusal of u without a reason. A matching table does not prove authorship or every possible input.</p></details></section>
+<section aria-labelledby="device-title"><h2 id="device-title">A fingerprint that returns</h2>
+<p id="device-status" role="status" data-face="u">U: starting the device protocol. Web Crypto must be available in this browser.</p>
+<p class="small">Public identifier: <code id="alias">u</code><br>Displayed fingerprint: <code id="fingerprint">u</code></p>
+<div class="inputs"><label style="flex-basis:100%">Burn behavior<select id="burn-mode"><option value="both">Hide and replace identifier</option><option value="hide">Hide fingerprint</option><option value="rotate">Replace identifier</option><option value="none">Neither</option></select></label>
+<label>Return after<select id="duration"><option value="1000">1 second</option><option value="10000" selected>10 seconds</option><option value="60000">1 minute</option></select></label></div>
+<div class="actions"><button id="burn" disabled>Burn display</button><button id="restore" disabled>Restore now</button></div>
+<p class="small">This changes the display in this copy. The source, license and contribution record remain available. Reloading restores the display.</p>
+<details><summary>Send a local text receipt</summary><label>Your text<input id="message" value="Hello, U." autocomplete="off"></label>
+<button id="send" disabled>Run local text</button><pre id="receipt" role="status">U: no text has been sent.</pre>
+<p class="small">The text stays in this page. Its receipt checks data integrity; it does not verify a person's identity or the truth of the text.</p></details></section>
+<details><summary>Read the code, credit and license</summary><p>Justichuu supplied the direction. Claude built the logic and consolidated the source; OpenAI Codex built the protocol and this browser entry. Other contributions stay unknown until supported by evidence.</p>
+<p><a href="https://github.com/Justichuu/u/blob/main/PROVENANCE.md">Full contribution record</a> · <a href="https://chuumind.com/u">U record</a></p>
+<h2>Logic source</h2><pre id="logic-source">/*U_SOURCE_TEXT*/</pre><h2>License</h2><pre>/*U_LICENSE_TEXT*/</pre></details>
+<script>
+/* Built from the checked-in modules. No eval, external import or request. */
+const originalHTML='<!doctype html>\n'+document.documentElement.outerHTML;
+const logic=(()=>{
+/*U_LOGIC*/
+return {u,not,and,or,tape,KNOWN};
+})();
+const protocol=(()=>{
+/*U_PROTOCOL*/
+return {createU};
+})();
+const byId=id=>document.getElementById(id);
+const say=(id,face,text)=>{byId(id).dataset.face=face;byId(id).textContent=text;};
+function inputs(){
+ const binary=byId('operation').value!=='not';byId('second-label').hidden=!binary;
+ const unknown=byId('first').value==='u'||binary&&byId('second').value==='u';
+ byId('reason-label').hidden=!unknown;return {binary,unknown};
+}
+function combine(){
+ const {binary,unknown}=inputs();
+ if(unknown&&!byId('reason').value.trim()){say('result','u','U: name the observation that would settle u.');byId('reason').focus();return;}
+ if(unknown)logic.u(byId('reason').value);
+ const a=byId('first').value,b=byId('second').value,op=byId('operation').value;
+ const result=binary?logic[op](a,b):logic.not(a);
+ say('result',result,`${result} · ${op==='not'?'NOT '+a:a+' '+op.toUpperCase()+' '+b}`);
+}
+byId('combine').disabled=false;byId('check').disabled=false;byId('download').disabled=false;
+byId('combine').onclick=combine;
+for(const id of ['first','second','operation'])byId(id).onchange=inputs;
+byId('check').onclick=()=>{const got=logic.tape();byId('tape').textContent=got;say('checks',got===logic.KNOWN?'1':'0',got===logic.KNOWN?'1: 22 of 22 results match the published table in this browser.':'0: this result differs from the published table.');};
+byId('download').onclick=()=>{const url=URL.createObjectURL(new Blob([originalHTML],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Run-U.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);};
+combine();
+(async()=>{
+ try{
+  const device=await protocol.createU();let timer;
+  function render(){const f=device.fingerprint();byId('alias').textContent=f.alias;byId('fingerprint').textContent=f.visible?f.fingerprint:'Hidden until return or Restore';
+   say('device-status','1',f.remainingMs>0?'1: display changed. Return follows the elapsed browser clock.':'1: original display is present.');return f;}
+  for(const id of ['burn','restore','send'])byId(id).disabled=false;
+  byId('burn').onclick=async()=>{byId('burn').disabled=true;try{await device.burn({mode:byId('burn-mode').value,durationMs:Number(byId('duration').value)});const f=render();clearTimeout(timer);if(f.remainingMs>0)timer=setTimeout(render,f.remainingMs+30);}catch(e){say('device-status','u','U: '+e.message);}finally{byId('burn').disabled=false;}};
+  byId('restore').onclick=()=>{clearTimeout(timer);device.restore();render();};
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+  byId('send').onclick=async()=>{byId('send').disabled=true;try{const r=await device.send('text',byId('message').value);byId('receipt').textContent=JSON.stringify(r,null,2);}catch(e){byId('receipt').textContent='U: '+e.message;}finally{byId('send').disabled=false;}};
+  render();
+ }catch(e){say('device-status','u','U: '+e.message+' Try a current browser with Web Crypto. Logic above remains available.');}
+})();
+</script>
+</body></html>

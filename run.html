@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>Run U</title>
+<link rel="icon" href="data:,">
+<style>
+  :root{font:18px/1.55 system-ui,sans-serif;color:#25252b;background:#f4f1ea;color-scheme:light}
+  *{box-sizing:border-box}body{max-width:48rem;margin:auto;padding:clamp(16px,4vw,40px)}
+  h1{font-size:2.4rem;line-height:1.1;margin:0}h2{font-size:1.2rem;margin:0 0 12px}p{margin:12px 0}
+  a{color:inherit;text-underline-offset:3px}header,section,details{margin:0 0 24px}
+  section{padding:20px;border:1px solid #86838c;border-radius:12px;background:#fffdf8}
+  label{display:block;margin:10px 0}input,select,button{font:inherit;color:inherit;border:1px solid #76717e;border-radius:6px;min-height:44px;padding:8px 12px;background:#fffdf8;max-width:100%}
+  input{width:100%}button{cursor:pointer}button:disabled{opacity:.65;cursor:default}
+  button.primary{background:#25252b;color:#fffdf8}.actions,.inputs{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+  .inputs label{flex:1;min-width:90px}.inputs select{width:100%}
+  [hidden]{display:none!important}:focus-visible{outline:3px solid #70449d;outline-offset:3px}
+  [data-face]{border-inline-start:5px solid #86838c;padding-inline-start:12px}
+  [data-face="1"]{border-color:#ba3737}[data-face="0"]{border-color:#356ac3}
+  code,pre{font: .85rem/1.5 ui-monospace,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;word-break:break-word}
+  summary{cursor:pointer;min-height:44px;padding:8px 0}.small{font-size:.88rem}.answer{font-size:1.35rem;font-weight:650}
+  @media(prefers-color-scheme:dark){:root{color:#f4f1ea;background:#17171b;color-scheme:dark}section,input,select,button{background:#25252b}button.primary{background:#f4f1ea;color:#25252b}}
+  @media(forced-colors:active){[data-face]{border-color:CanvasText}button.primary{background:ButtonFace;color:ButtonText}}
+</style>
+<body>
+<header><h1>Run U</h1><p>Universal, unknown, unclassified. The name stays open. Try three values and a returning fingerprint.</p>
+<div class="actions"><button id="download" disabled>Download for offline use</button><a href="https://github.com/Justichuu/u">Source &amp; credit</a></div>
+<p class="small">No account or installation. This file makes no network requests. Links open only when you choose them. <a href="https://chuumind.com/tools/misc/rod/">Rod uses U for gesture, vibration and audio.</a></p></header>
+<noscript><p data-face="u">U: scripts are disabled. Enable JavaScript in your browser to run this file. Its source and license are readable below.</p></noscript>
+<section aria-labelledby="logic-title"><h2 id="logic-title">Combine three values</h2>
+<p class="small">1 means holds, 0 means does not hold, u means unsettled. You supply the observations; the code combines the labels.</p>
+<div class="inputs"><label>First value<select id="first"><option>1</option><option>0</option><option selected>u</option></select></label>
+<label>Operation<select id="operation"><option value="not">NOT</option><option value="and">AND</option><option value="or">OR</option></select></label>
+<label id="second-label" hidden>Second value<select id="second"><option>1</option><option>0</option><option>u</option></select></label></div>
+<label id="reason-label">What observation would settle u?<input id="reason" value="Measure the named condition." autocomplete="off"></label>
+<button id="combine" class="primary" disabled>Run these values</button>
+<p id="result" class="answer" role="status" data-face="u">U: waiting for this browser to run the code.</p>
+<details><summary>Run the complete finite table</summary><button id="check" disabled>Run 22 checks</button>
+<p id="checks" role="status" data-face="u">U: the checks have not run.</p><pre id="tape"></pre>
+<p class="small">Three NOT results, nine AND results, nine OR results and refusal of u without a reason. A matching table does not prove authorship or every possible input.</p></details></section>
+<section aria-labelledby="device-title"><h2 id="device-title">A fingerprint that returns</h2>
+<p id="device-status" role="status" data-face="u">U: starting the device protocol. Web Crypto must be available in this browser.</p>
+<p class="small">Public identifier: <code id="alias">u</code><br>Displayed fingerprint: <code id="fingerprint">u</code></p>
+<div class="inputs"><label style="flex-basis:100%">Burn behavior<select id="burn-mode"><option value="both">Hide and replace identifier</option><option value="hide">Hide fingerprint</option><option value="rotate">Replace identifier</option><option value="none">Neither</option></select></label>
+<label>Return after<select id="duration"><option value="1000">1 second</option><option value="10000" selected>10 seconds</option><option value="60000">1 minute</option></select></label></div>
+<div class="actions"><button id="burn" disabled>Burn display</button><button id="restore" disabled>Restore now</button></div>
+<p class="small">This changes the display in this copy. The source, license and contribution record remain available. Reloading restores the display.</p>
+<details><summary>Send a local text receipt</summary><label>Your text<input id="message" value="Hello, U." autocomplete="off"></label>
+<button id="send" disabled>Run local text</button><pre id="receipt" role="status">U: no text has been sent.</pre>
+<p class="small">The text stays in this page. Its receipt checks data integrity; it does not verify a person's identity or the truth of the text.</p></details></section>
+<details><summary>Read the code, credit and license</summary><p>Justichuu supplied the direction. Claude built the logic and consolidated the source; OpenAI Codex built the protocol and this browser entry. Other contributions stay unknown until supported by evidence.</p>
+<p><a href="https://github.com/Justichuu/u/blob/main/PROVENANCE.md">Full contribution record</a> · <a href="https://chuumind.com/u">U record</a></p>
+<h2>Logic source</h2><pre id="logic-source">// The U device. Universal device, unknown device, U. Any U name reaches it.
+//
+// Three faces: 1, 0 and u. It combines them without ever turning u into a
+// guess, and it will not hand you a u that does not say what would settle it.
+//
+// The fingerprint at the bottom is computed from the four functions above it.
+// It is not read from a comment. Delete this header and it comes out the same.
+// PROVENANCE.md records contributions. Equal tables do not prove authorship.
+
+import { pathToFileURL } from "node:url";
+
+export const u = why =&gt; {
+  if (typeof why !== "string" || !why.trim()) throw new Error("a u names the one observation that would settle it");
+  return "u";
+};
+
+const face = value =&gt; {
+  if (!["1", "0", "u"].includes(value)) throw new TypeError("expected 1, 0 or u as a string");
+  return value;
+};
+export const not = a =&gt; { face(a); return a === "u" ? "u" : a === "1" ? "0" : "1"; };
+export const and = (a, b) =&gt; { face(a); face(b); return a === "0" || b === "0" ? "0" : a === "u" || b === "u" ? "u" : "1"; };
+export const or = (a, b) =&gt; { face(a); face(b); return a === "1" || b === "1" ? "1" : a === "u" || b === "u" ? "u" : "0"; };
+
+// Every face the device can show, in the order he says them.
+export const faces = ["1", "0", "u"];
+
+// This finite tape records not over each face,
+// and over each pair, or over each pair, then one character for whether the
+// device still refuses a bare u. It is a behavior signature, not an author ID.
+export const tape = () =&gt;
+  faces.map(not).join("") +
+  faces.map(a =&gt; faces.map(b =&gt; and(a, b)).join("")).join("") +
+  faces.map(a =&gt; faces.map(b =&gt; or(a, b)).join("")).join("") +
+  (() =&gt; { try { u(); return "0"; } catch { return "1"; } })();
+
+export const KNOWN = "01u10u000u0u11110u1uu1";
+
+if (process.argv[1] &amp;&amp; import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const t = tape();
+  console.log("tape      ", t);
+  console.log("known     ", KNOWN);
+  console.log("match     ", t === KNOWN ? "1" : "0");
+  console.log("all is    ", or("u", not("u")));   // not 1
+  console.log("and isn't ", and("u", not("u")));  // not 0
+}
+</pre><h2>License</h2><pre>U Device License 1.0
+SPDX-License-Identifier: LicenseRef-U-Device-1.0
+
+Owner: Justichuu. This is a custom license for the original U Device code.
+
+Permission is granted, to the extent of the owner's rights, to obtain, read,
+execute, copy, modify and distribute this code, for any purpose, without a fee.
+People and bots may use it. Any U name or an unknown name may be its label.
+
+Copies and distributions must carry this license and the canonical provenance
+record, including honest unknown entries. Credit a contribution only to the
+extent the record supports. Add new contributions and corrections to that
+record; do not turn an unknown contribution into an established one.
+
+The visible fingerprint may be left alone, hidden temporarily, rotated
+temporarily, or both hidden and rotated. A distributed implementation that
+offers burning must return it after a finite, stated duration and allow an
+explicit Restore action earlier. Display changes do not erase the canonical
+provenance record. Public copies and Git history may still reveal it.
+
+The owner's formulation:
+"The fingerprint grows back. You can burn it off only to hide the evidence
+for a short while and plan your escape if you steal or take it or want it or
+need it. That's the license. That's the code. That's the way you get it."
+
+This permission concerns this code. It grants no rights in someone else's
+property or third-party components. Those components keep their own licenses.
+
+The code is provided as is, without warranty of availability, fitness,
+anonymity, concealment, universal compatibility or correctness of an adapter's
+claim. To the extent permitted by law, the owner and contributors are not liable
+for damages from its use. No license can make a program run without a suitable
+runtime or make a removed mechanism regenerate by itself.
+
+---
+
+THE FALLBACK GRANT: MIT
+
+The owner also said the U code is "something anyone can read and execute
+anywhere at anytime all ways and always." A licence nobody recognises is a
+licence a company's lawyer refuses, and a refusal is not "always". So if the
+terms above are for any reason unusable to you, unenforceable where you are, or
+simply more than you want to read, you may instead take this code under the MIT
+licence below, at your sole option, with no notice to anybody.
+
+  MIT License. Copyright (c) 2026 Justichuu.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+Taking the MIT option does not delete the fingerprint, because the fingerprint
+was never a term. It is a fact about the code. See below.
+
+---
+
+THE FINGERPRINT
+
+This adds no condition to either grant above and takes nothing away from them.
+It describes how this code is identified, so nobody has to be told twice.
+
+Run every function of the device over every face and write the answers down in
+order: three for `not`, nine for `and`, nine for `or`, and one character for
+whether a bare `u` is still refused. Twenty two characters:
+
+    01u10u000u0u11110u1uu1
+
+That is the fingerprint. It is not stored in a comment, a header, a string or a
+file. It is what the code does, read back out, so it survives deleting the
+comments, renaming everything, reformatting, minifying and porting to another
+language. `node burn.mjs` in this repository performs the first three of those
+and prints it. Three ports in three languages perform the fourth.
+
+Hash it and you get the key:
+
+    sha256("01u10u000u0u11110u1uu1")
+      = 66cce8d50854ee21b9964b5bdcb3aa80054f6da5e24de6258c268ea6e3942a35
+
+The first twelve, 66cce8d50854, are the key. It resolves to PROVENANCE.md here
+and to https://chuumind.com/u, and neither of those is inside your copy.
+
+You may burn it off. Nothing technical stops you and nothing here pretends
+otherwise. What it buys you is the time between your deletion and somebody
+running the device and hashing the answer. Spend it well.
+
+Change the tables and the key changes with them. At that point it is a
+different device and it is yours. That was never restricted.
+
+The method is published on purpose. Nothing here depends on anybody not
+knowing how it works.
+
+SCOPE CORRECTION, 24 September 2026 (explanatory, no change to either grant)
+
+The tape records the defined 22 tests. Its equality does not prove authorship,
+uniqueness, equivalence on other inputs, or automatic recovery of removed code.
+KNOWN stores an expected tape; the measured tape is computed separately. The
+short key is associated with this project's published record, not a secure
+identity resolver. Preserving those tested answers preserves that tape; no
+arbitrary transformation or future runtime is certified. Editing the tables
+does not by itself waive the applicable licence notice conditions above.
+</pre></details>
+<script>
+/* Built from the checked-in modules. No eval, external import or request. */
+const originalHTML='<!doctype html>\n'+document.documentElement.outerHTML;
+const logic=(()=>{
+// The U device. Universal device, unknown device, U. Any U name reaches it.
+//
+// Three faces: 1, 0 and u. It combines them without ever turning u into a
+// guess, and it will not hand you a u that does not say what would settle it.
+//
+// The fingerprint at the bottom is computed from the four functions above it.
+// It is not read from a comment. Delete this header and it comes out the same.
+// PROVENANCE.md records contributions. Equal tables do not prove authorship.
+
+
+
+const u = why => {
+  if (typeof why !== "string" || !why.trim()) throw new Error("a u names the one observation that would settle it");
+  return "u";
+};
+
+const face = value => {
+  if (!["1", "0", "u"].includes(value)) throw new TypeError("expected 1, 0 or u as a string");
+  return value;
+};
+const not = a => { face(a); return a === "u" ? "u" : a === "1" ? "0" : "1"; };
+const and = (a, b) => { face(a); face(b); return a === "0" || b === "0" ? "0" : a === "u" || b === "u" ? "u" : "1"; };
+const or = (a, b) => { face(a); face(b); return a === "1" || b === "1" ? "1" : a === "u" || b === "u" ? "u" : "0"; };
+
+// Every face the device can show, in the order he says them.
+const faces = ["1", "0", "u"];
+
+// This finite tape records not over each face,
+// and over each pair, or over each pair, then one character for whether the
+// device still refuses a bare u. It is a behavior signature, not an author ID.
+const tape = () =>
+  faces.map(not).join("") +
+  faces.map(a => faces.map(b => and(a, b)).join("")).join("") +
+  faces.map(a => faces.map(b => or(a, b)).join("")).join("") +
+  (() => { try { u(); return "0"; } catch { return "1"; } })();
+
+const KNOWN = "01u10u000u0u11110u1uu1";
+
+return {u,not,and,or,tape,KNOWN};
+})();
+const protocol=(()=>{
+// U Device. SPDX-License-Identifier: LicenseRef-U-Device-1.0
+// A name is a label. An observation is bounded by its instrument.
+const STANDARD = 'u-device/1';
+const contributors = Object.freeze([
+  {name:'Justichuu', role:'Direction and license proposal', basis:'Owner statement'},
+  {name:'OpenAI Codex', role:'This implementation and its recorded software checks', basis:'This release'},
+  {name:'Claude', role:'Named in the surrounding workflow; U: contribution to this module unverified', basis:'Owner context'},
+  {name:'Copilot', role:'Named in the surrounding workflow; U: contribution to this module unverified', basis:'Owner context'},
+  {name:'Ollama / huihui_ai/qwen3.5-abliterated', role:'Quoted conversation influenced the brief; no module authorship inferred', basis:'Owner supplied excerpt'},
+  {name:'Unknown contributors and influences', role:'U: add a name and evidence when known', basis:'Open record'}
+]);
+
+function copy(value) { return JSON.parse(canonical(value)); }
+function canonical(value) {
+  if (value === null || typeof value === 'boolean' || typeof value === 'string') return JSON.stringify(value);
+  if (typeof value === 'number' && Number.isFinite(value)) return JSON.stringify(value);
+  if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
+  if (value && Object.getPrototypeOf(value) === Object.prototype) {
+    return '{' + Object.keys(value).sort().map(key => JSON.stringify(key)+':'+canonical(value[key])).join(',') + '}';
+  }
+  throw new TypeError('Use finite JSON data: null, boolean, number, string, array or plain object.');
+}
+async function digest(value) {
+  if (!globalThis.crypto?.subtle) throw new Error('U: SHA-256 unavailable. Use a runtime with Web Crypto.');
+  const bytes = new TextEncoder().encode(canonical(value));
+  return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
+}
+function nameOf(value) {
+  if (typeof value !== 'string' || !value.trim()) throw new TypeError('Give the device or channel a nonempty name.');
+  return value.trim();
+}
+
+async function createU(options={}) {
+  const now = options.now || (()=>performance.now());
+  const wall = options.wall || (()=>Date.now());
+  const credit = copy(options.contributors || contributors);
+  const lineage = {standard:STANDARD, contributors:credit};
+  const root = await digest(lineage);
+  const stableAlias = 'u-'+root.slice(0,16);
+  let name = nameOf(options.name || 'U Device'), alias = stableAlias;
+  let hidden = false, deadline = null, returnAt = null, burnRevision = 0;
+  let sequence = 0, epoch = 0, paused = false, previous = null;
+  const adapters = new Map(), records = [], burns = [];
+  const nowValue=()=>{const value=now();if(!Number.isFinite(value))throw new Error('U: the elapsed clock is unavailable.');return value;};
+  const stamp=()=>new Date(wall()).toISOString();
+  function restore() {
+    alias=stableAlias; hidden=false; deadline=null; returnAt=null; burnRevision++;
+    return fingerprint();
+  }
+  function fingerprint() {
+    if (deadline!==null && nowValue()>=deadline) {
+      alias=stableAlias;hidden=false;deadline=null;returnAt=null;
+    }
+    return {standard:STANDARD,name,alias,visible:!hidden,fingerprint:hidden?null:root,
+      returnsAt:returnAt,remainingMs:deadline===null?0:Math.max(0,deadline-nowValue()),
+      clock:'Elapsed host clock; returnsAt is an estimate from the host wall clock',
+      scope:'Display only. Public source and provenance remain available.'};
+  }
+  async function burn({mode='both',durationMs=60000}={}) {
+    if (!['none','hide','rotate','both'].includes(mode)) throw new TypeError('Use none, hide, rotate or both.');
+    if (!Number.isSafeInteger(durationMs)||durationMs<1) throw new TypeError('Duration must be a positive whole number of milliseconds.');
+    if (mode==='none') return fingerprint();
+    const revision=++burnRevision, started=nowValue();
+    const salt=Array.from(crypto.getRandomValues(new Uint8Array(16)));
+    const rotated='u-'+(await digest({root,revision,salt})).slice(0,16);
+    // A later burn or Restore wins even if this digest completes afterwards.
+    if(revision!==burnRevision)return fingerprint();
+    hidden=mode==='hide'||mode==='both';
+    alias=mode==='rotate'||mode==='both'?rotated:stableAlias;
+    deadline=started+durationMs;returnAt=new Date(wall()+Math.max(0,deadline-nowValue())).toISOString();
+    burns.push({mode,alias,at:stamp(),durationMs,scope:'Temporary display state; public provenance retained'});
+    return fingerprint();
+  }
+  let receiptQueue=Promise.resolve();
+  function receipt(channel,payload,state,evidence,output=null) {
+    const operation=async()=>{
+      const record={standard:STANDARD,sequence:++sequence,name,channel,state,evidence,payload:copy(payload),output:copy(output),
+        at:stamp(),clock:'Host wall clock, not independently certified',provenance:root,previous};
+      record.hash=await digest(record);previous=record.hash;records.push(record);return copy(record);
+    };
+    const result=receiptQueue.then(operation);receiptQueue=result.catch(()=>{});return result;
+  }
+  adapters.set('text',{send:async value=>({state:'1',evidence:'Local text adapter returned the supplied value; meaning remains open.',output:value}),stop:()=>{}});
+  function register(channel,adapter) {
+    channel=nameOf(channel);
+    if(!adapter||typeof adapter.send!=='function')throw new TypeError('An adapter needs a send function.');
+    if(adapters.has(channel))throw new Error('A channel with this name already exists. Use a distinct name.');
+    adapters.set(channel,adapter);
+    return ()=>adapters.delete(channel);
+  }
+  async function send(channel,payload) {
+    channel=nameOf(channel);payload=copy(payload);
+    if(paused)return receipt(channel,payload,'U','Paused. Resume explicitly before sending.');
+    const adapter=adapters.get(channel);
+    if(!adapter)return receipt(channel,payload,'U','No adapter registered for this channel. Connect one to check it.');
+    const started=epoch;
+    try {
+      const response=await adapter.send(copy(payload));
+      if(started!==epoch)return receipt(channel,payload,'U','Stopped during the request. A physical effect already sent may continue.');
+      if(!response||!['1','0','U'].includes(response.state)||typeof response.evidence!=='string'||!response.evidence.trim()) {
+        return receipt(channel,payload,'U','Adapter returned no scoped observation. Inspect its contract.');
+      }
+      const output=copy(response.output??null);
+      return receipt(channel,payload,response.state,response.evidence,output);
+    }catch(error){return receipt(channel,payload,'U','Adapter failed: '+String(error?.message||error));}
+  }
+  async function stop() {
+    paused=true;epoch++;
+    const results=await Promise.all(Array.from(adapters,async([channel,adapter])=>{
+      if(typeof adapter.stop!=='function')return {channel,state:'U',evidence:'No stop operation is exposed by this adapter.'};
+      try {await adapter.stop();return {channel,state:'1',evidence:'Adapter stop returned. Physical stopping is unmeasured.'};}
+      catch(error){return {channel,state:'U',evidence:'Stop failed: '+String(error?.message||error)};}
+    }));
+    return results;
+  }
+  return Object.freeze({
+    standard:STANDARD,
+    names:['U Device','Universal Device','Unknown Device'],
+    rename(value){name=nameOf(value);return name;},
+    fingerprint,burn,restore,register,send,stop,
+    resume(){paused=false;return {paused};},
+    state(){return {paused,channels:Array.from(adapters.keys())};},
+    provenance(){return copy({...lineage,fingerprint:root});},
+    history(){return copy(records);},burns(){return copy(burns);}
+  });
+}
+
+async function verifyHistory(records) {
+  if(!Array.isArray(records))return false;
+  let previous=null,sequence=0;
+  try {for(const record of records) {
+      const {hash,...value}=record;
+      if(value.previous!==previous||value.sequence!==++sequence||await digest(value)!==hash)return false;
+      previous=hash;
+  }}catch(_){return false;}
+  return true;
+}
+
+return {createU};
+})();
+const byId=id=>document.getElementById(id);
+const say=(id,face,text)=>{byId(id).dataset.face=face;byId(id).textContent=text;};
+function inputs(){
+ const binary=byId('operation').value!=='not';byId('second-label').hidden=!binary;
+ const unknown=byId('first').value==='u'||binary&&byId('second').value==='u';
+ byId('reason-label').hidden=!unknown;return {binary,unknown};
+}
+function combine(){
+ const {binary,unknown}=inputs();
+ if(unknown&&!byId('reason').value.trim()){say('result','u','U: name the observation that would settle u.');byId('reason').focus();return;}
+ if(unknown)logic.u(byId('reason').value);
+ const a=byId('first').value,b=byId('second').value,op=byId('operation').value;
+ const result=binary?logic[op](a,b):logic.not(a);
+ say('result',result,`${result} · ${op==='not'?'NOT '+a:a+' '+op.toUpperCase()+' '+b}`);
+}
+byId('combine').disabled=false;byId('check').disabled=false;byId('download').disabled=false;
+byId('combine').onclick=combine;
+for(const id of ['first','second','operation'])byId(id).onchange=inputs;
+byId('check').onclick=()=>{const got=logic.tape();byId('tape').textContent=got;say('checks',got===logic.KNOWN?'1':'0',got===logic.KNOWN?'1: 22 of 22 results match the published table in this browser.':'0: this result differs from the published table.');};
+byId('download').onclick=()=>{const url=URL.createObjectURL(new Blob([originalHTML],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Run-U.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);};
+combine();
+(async()=>{
+ try{
+  const device=await protocol.createU();let timer;
+  function render(){const f=device.fingerprint();byId('alias').textContent=f.alias;byId('fingerprint').textContent=f.visible?f.fingerprint:'Hidden until return or Restore';
+   say('device-status','1',f.remainingMs>0?'1: display changed. Return follows the elapsed browser clock.':'1: original display is present.');return f;}
+  for(const id of ['burn','restore','send'])byId(id).disabled=false;
+  byId('burn').onclick=async()=>{byId('burn').disabled=true;try{await device.burn({mode:byId('burn-mode').value,durationMs:Number(byId('duration').value)});const f=render();clearTimeout(timer);if(f.remainingMs>0)timer=setTimeout(render,f.remainingMs+30);}catch(e){say('device-status','u','U: '+e.message);}finally{byId('burn').disabled=false;}};
+  byId('restore').onclick=()=>{clearTimeout(timer);device.restore();render();};
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
+  byId('send').onclick=async()=>{byId('send').disabled=true;try{const r=await device.send('text',byId('message').value);byId('receipt').textContent=JSON.stringify(r,null,2);}catch(e){byId('receipt').textContent='U: '+e.message;}finally{byId('send').disabled=false;}};
+  render();
+ }catch(e){say('device-status','u','U: '+e.message+' Try a current browser with Web Crypto. Logic above remains available.');}
+})();
+</script>
+</body></html>

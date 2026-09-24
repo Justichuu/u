@@ -6,7 +6,9 @@
 //
 //   node burn.mjs
 
-import { writeFileSync, readFileSync, rmSync } from "node:fs";
+import { writeFileSync, readFileSync, rmSync, mkdtempSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { execFileSync } from "node:child_process";
 import { KNOWN } from "./u.js";
 
@@ -42,11 +44,12 @@ const burned =
       .replace(/\bexport \b/g, "")
   ) + "\nconsole.log(q5());\n";
 
-const scratch = new URL("./burned.tmp.mjs", import.meta.url);
-writeFileSync(scratch, burned);
+const directory = mkdtempSync(join(tmpdir(), 'u-behavior-'));
+const scratch = join(directory, 'burned.mjs');
 
 try {
-  const got = execFileSync("node", [decodeURIComponent(scratch.pathname).replace(/^\//, "")], { encoding: "utf8" }).trim();
+  writeFileSync(scratch, burned);
+  const got = execFileSync(process.execPath, [scratch], { encoding: "utf8" }).trim();
   const left = (burned.match(/chuumind|Justichuu|fingerprint|owner/gi) || []).length;
 
   console.log("\nthe burned copy, in full\n");
@@ -56,9 +59,9 @@ try {
   console.log("  published tape                    ", KNOWN);
   console.log("  key to look up                    ", "66cce8d50854");
   console.log(got === KNOWN
-    ? "\n1  it grew back. the key still resolves at chuumind.com/u\n"
+    ? "\n1  the finite behavior table survived this transformation. Authorship is not established.\n"
     : "\n0  it did not\n");
-  process.exit(got === KNOWN ? 0 : 1);
+  process.exitCode = got === KNOWN ? 0 : 1;
 } finally {
-  rmSync(scratch, { force: true });
+  rmSync(directory, { recursive: true, force: true });
 }

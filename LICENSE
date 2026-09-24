@@ -102,3 +102,13 @@ different device and it is yours. That was never restricted.
 
 The method is published on purpose. Nothing here depends on anybody not
 knowing how it works.
+
+SCOPE CORRECTION, 24 September 2026 (explanatory, no change to either grant)
+
+The tape records the defined 22 tests. Its equality does not prove authorship,
+uniqueness, equivalence on other inputs, or automatic recovery of removed code.
+KNOWN stores an expected tape; the measured tape is computed separately. The
+short key is associated with this project's published record, not a secure
+identity resolver. Preserving those tested answers preserves that tape; no
+arbitrary transformation or future runtime is certified. Editing the tables
+does not by itself waive the applicable licence notice conditions above.
