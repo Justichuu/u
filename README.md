@@ -148,3 +148,22 @@ A viewport is not a physical phone observation.
 tape remain unestablished. They require the relevant runtime/device observation
 or independent contribution evidence. CI and later releases add named snapshots;
 they do not establish all future behavior.
+
+## Repository history
+
+[W] On 2 October 2026, the retired `u-core` and `u-device` folders were consolidated
+into this checkout on local branch `nostalgia`. Their original tips are merge
+parents; the current U implementation stays unchanged. Tags under
+`history/u-core/` and `history/u-device/` retain every original branch, remote ref
+and annotated release tag. For example, `git show history/u-core/heads/main:u.py`
+reads the original core. The original license versions remain in those histories.
+
+[W] The unmerged perennial experiment remains on `retained/perennial`, outside
+the active product. Both existing linked worktrees remain in place; the former
+device worktree now belongs to this repository on
+`legacy/u-device/codex/u-adapters`. Its project files, index and reflog are unchanged.
+
+[W] Original U reflog commits are pinned under `history/u/reflog/`; other loose
+recovery objects use local `refs/local-recovery/u/objects/`. Those local refs and
+the hash receipt in `.git/consolidation/2026-10-02/` are not carried by a normal
+clone. No remote was updated. Owner instruction: AATM `ref:b3e9e0409bf9bcd4`.
