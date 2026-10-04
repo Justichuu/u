@@ -1,6 +1,41 @@
 // SPDX-License-Identifier: LicenseRef-U-Device-1.0 OR MIT
 // One audio contract for a headset, an audio-connected transducer or another sink.
 // Device type and bone-conducted perception are observations the caller must supply.
+/* ios-sound start: an iPhone's ringer switch mutes web audio and the system voice, never a video. Before any sound
+starts, ask iOS for the playback session (iOS 17 and later); older iOS keeps a silent clip playing alongside. One
+copy: ops/release/tonight-20261003/sound/sound.js; a test keeps every page's copy equal to it. */
+(function () {
+  if (typeof window === "undefined" || window.__iosSound) return; window.__iosSound = 1;   // a module imported by a test in Node has no window
+  var older = /iP(hone|ad|od)/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  var silent = null, live = [];
+  function playback() {
+    [window, window.top].forEach(function (w) {   // the page and, in the reading shell, the page around it
+      try { var s = w.navigator.audioSession; if (s && s.type !== "playback") s.type = "playback"; } catch (e) {}
+    });
+    if (navigator.audioSession || !older) return;
+    try {   // a one-off clip lets the session fall back as soon as it ends, so it loops while the page is shown
+      if (!silent) { silent = new Audio("/assets/silence.wav"); silent.loop = true; silent.setAttribute("playsinline", ""); }
+      if (silent.paused) silent.play().catch(function () {});
+    } catch (e) {}
+  }
+  function wrap(proto, name, ctx) {
+    if (!proto || typeof proto[name] !== "function" || proto[name].__ios) return;
+    var f = proto[name];
+    proto[name] = function () { playback(); var c = ctx(this); if (c && live.indexOf(c) < 0) live.push(c); return f.apply(this, arguments); };
+    proto[name].__ios = 1;
+  }
+  var AC = window.AudioContext || window.webkitAudioContext, mine = function (t) { return t; }, its = function (t) { return t.context; };
+  if (AC) wrap(AC.prototype, "resume", mine);
+  ["AudioScheduledSourceNode", "AudioBufferSourceNode", "OscillatorNode", "ConstantSourceNode"].forEach(function (n) {   // a buffer source has its own start
+    var P = window[n] && window[n].prototype; if (P && Object.prototype.hasOwnProperty.call(P, "start")) wrap(P, "start", its);
+  });
+  if (window.SpeechSynthesis) wrap(SpeechSynthesis.prototype, "speak", function () { return null; });
+  document.addEventListener("visibilitychange", function () {   // iOS suspends audio in a hidden tab; bring it back on return
+    if (document.hidden) { if (silent) silent.pause(); return; }
+    live.forEach(function (c) { if (c.state === "interrupted") try { c.resume().catch(function () {}); } catch (e) {} });
+  });
+})();
+/* ios-sound end */
 export function createAudioAdapter(host=globalThis) {
   let context=null, oscillator=null, utterance=null, finish=null, revision=0;
   const unknown=evidence=>({state:'U',evidence,output:null});

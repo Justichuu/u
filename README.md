@@ -48,6 +48,21 @@ and explicitly requested speech with a local system voice. No exposed local
 voice stays U. A completion receipt reports browser execution, never what a
 person heard. See [STANDARD.md](STANDARD.md) for the contract.
 
+## U2-bytes: three witnesses in four bits
+
+Justichuu, 3 October 2026: "Rules for U2, only build off u, as i would." A U2-byte holds
+three witnesses: two bits that say `1` or `0`, and one u-bit that may also say `u`. Its
+face is `1` only when all three say `1`, `0` only when all three say `0`, and `u` until
+they agree. It packs into four bits; the u-bit's pattern `01` is a bare u and is refused.
+`u2.js` builds every face from `u.js` and holds no table of its own.
+
+```js
+import {agree, pack, unpack} from './u2.js';
+agree('1', '1', 'u');  // 'u': one witness has not settled
+pack('1', '1', '1');   // 15, all three agree on 1
+unpack(0b0110);        // ['0', '1', '0']
+```
+
 ## Optional: use the logic in your own code
 
 ```js
