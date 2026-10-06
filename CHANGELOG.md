@@ -8,6 +8,14 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-10-06
+
+### Fixed
+
+- [W] The 1.2.0 release manifest hashed `PROVENANCE.md` and `test/logic.test.mjs` with
+  Windows line endings, so `checks/verify-sources.mjs` failed on GitHub. Every hash is now
+  taken from the committed bytes. No code changed.
+
 ## [1.2.0] - 2026-10-06
 
 ### Added
