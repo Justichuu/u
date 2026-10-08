@@ -8,6 +8,17 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-10-08
+
+### Fixed
+
+- [W] The fractal depth slider now has an explicit association with its
+  visible label. Previously the nested output received that implicit label
+  and the slider had no accessible name. The new browser regression failed
+  before the fix. Keyboard depth behavior and the drawing are unchanged.
+- Physical assistive technology remains unobserved; the regression checks
+  the browser's accessible role/name and native label association.
+
 ## [1.3.0] - 2026-10-08
 
 ### Added

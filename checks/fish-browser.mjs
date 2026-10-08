@@ -21,6 +21,8 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   const click=id=>page.locator('#fish-'+id).click();
   assert.match(await state(),/^0 · progress 0/);
   assert.equal(await page.locator('#fish-depth').inputValue(),'3');
+  assert.equal(await page.getByRole('slider',{name:/Fractal depth/}).count(),1,'Fractal depth needs its visible accessible name');
+  assert.equal(await page.locator('#fish-depth').evaluate(el=>el.labels.length),1,'Depth slider must be associated with its label');
   assert.equal(await page.locator('#fish-copies use').count(),14);
   assert.match(await page.locator('#fish-recursion').textContent(),/15 fish.*finite preview/);
   const originalState=await state();
