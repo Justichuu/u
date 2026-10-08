@@ -10,11 +10,13 @@
     "./protocol": "./u.mjs",
     "./audio": "./audio.mjs",
     "./u2": "./u2.js",
-    "./u5": "./u5.js"
+    "./u5": "./u5.js",
+    "./fish": "./fish.js"
   },
   "scripts": {
     "build": "node build-browser.mjs",
     "test": "node verify.mjs && node --test \"test/*.test.mjs\"",
+    "test:browser": "node checks/fish-browser.mjs",
     "burn": "node burn.mjs"
   },
   "keywords": [
