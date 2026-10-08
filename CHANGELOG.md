@@ -8,6 +8,13 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+- [W] Run U's fish note gives its window in words, "from 0 to one and three
+  tenths", where it printed a decimal: what people read takes whole numbers and
+  words. Code keeps its exact numbers. `npm test` passes
+  46 of 46; `checks/fish-browser.mjs` passes in Chromium, Firefox and WebKit.
+  Not checked: a release; the page is still 15,960 bytes gzipped, over the
+  site's 14,600 first-window budget.
+
 ## [1.3.2] - 2026-10-08
 
 ### Fixed
