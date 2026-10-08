@@ -37,6 +37,10 @@ angle, phase and pace. The marker stays on the original fish. This is a finite
 preview of a recursive construction; copy addresses do not add truth values.
 The reusable transforms are exported from `u/fish-fractal`.
 
+Like [Pando](https://www.fs.usda.gov/r04/fishlake/recreation/explore-forest/pando),
+the repeated forms suggest connection and a shared origin. This is an analogy;
+the fish is not a biological model of Pando or biodiversity.
+
 ```js
 import {carry, swim, negate, positions, geometry} from 'u/fish';
 const later = swim(carry('0'), 1);
@@ -227,4 +231,4 @@ device worktree now belongs to this repository on
 [W] Original U reflog commits are pinned under `history/u/reflog/`; other loose
 recovery objects use local `refs/local-recovery/u/objects/`. Those local refs and
 the hash receipt in `.git/consolidation/2026-10-02/` are not carried by a normal
-clone. No remote was updated. Owner instruction: AATM `ref:b3e9e0409bf9bcd4`.
+clone. No remote was updated during that consolidation.

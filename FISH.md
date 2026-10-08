@@ -139,13 +139,8 @@ agent error. The previous body used cubic polynomials; the existing library's
 Cycloid implementation instead uses `r*(theta-sin(theta))` and
 `r*(1-cos(theta))` (`model.js`, `cycloidThrough` and its path generator).
 
-[W] AATM's saved index contains “Asymmetry remember is the point”
-(`ref:19c9e28ad7347242`, 27 August), “its asymmetric on one channel and symmetric
-on the other” within `ref:46f431cb4d94c727` (28 August), and “Asymmetric and
-symmetric patterns working together and off each other”
-(`ref:f5ac2d109a280efc`, 3 October). These are design context, not proofs of a
-particular curve transform. “3 cycloids connected by points forever available
-on cycloids” is `ref:cb8df10aa80bbfd1` (23 September).
+[A] Earlier design context motivates using symmetry and asymmetry together.
+It supplies no measured angle, phase, scale or particular curve transform.
 
 [R] A whole pair related by one exact reflection has that reflection symmetry.
 Asymmetry needs an additional specified feature, such as placement, unequal
@@ -259,3 +254,12 @@ their parents into a tree. No native-calculator check of this recursion was run.
 infinite construction satisfies F = S union T0(F) union T1(F). Including S
 retains the fish at every generation. This is a condensation construction;
 the finite display includes all generations through the chosen depth.
+
+## Pando analogy, 8 October 2026
+
+[A] Pando offers an analogy of connected forms sharing an origin. The fish
+preview repeats one seed through fixed similarities. This is not a biological
+model of Pando, clonal growth or biodiversity. The
+[US Forest Service account of Pando](https://www.fs.usda.gov/r04/fishlake/recreation/explore-forest/pando)
+describes one seed and new shoots from an expanding root system. That account
+is the source of the analogy, not evidence for these geometric parameters.

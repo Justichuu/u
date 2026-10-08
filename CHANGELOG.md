@@ -8,6 +8,8 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-08
+
 ### Added
 
 - [W] Run U's fractal depth control builds a branching tree of 1–127 cycloid
