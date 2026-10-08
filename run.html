@@ -811,7 +811,7 @@ function drawGeometry(options,depth=fractalDepth){
  byId('fish-seed').replaceChildren(...paths.map(path=>path.cloneNode(true)));
  byId('fish-copies').replaceChildren(...children);
  byId('fish-depth').value=depth;byId('fish-depth-label').textContent=depth;
- byId('fish-recursion').textContent=`Depth ${depth}: ${copies.length} fish. Each child is ${fishFractal.FRACTAL_SCALE*100}% of its parent. This is a finite preview of a continuing recursive construction.`;
+ byId('fish-recursion').textContent=`Depth ${depth}: ${copies.length} fish. Each child is ${numberText(fishFractal.FRACTAL_SCALE*100)}% of its parent. This is a finite preview of a continuing recursive construction.`;
  byId('fish-graph').setAttribute('viewBox',`${left-pad} ${-top-pad} ${right-left+2*pad} ${top-bottom+2*pad}`);
  byId('fish-intersection').textContent=hit?`Approximate second intersection: branch 0 at ${numberText(hit.first)}, branch 1 at ${numberText(hit.second)}; (${numberText(hit.x)}, ${numberText(hit.y)}). Equal progress need not place both markers there.`:'No second intersection found in the displayed window. Both branches remain solid; this search does not establish that they never meet.';
  for(const name of ['angle','phase','pace'])byId('fish-'+name).value=next[name];
