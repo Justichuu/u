@@ -20,6 +20,46 @@ The values can label holds, does not hold, and unknown. The logic combines
 those labels; it does not perform measurements or authenticate a caller's
 claim. Two-valued logic does not itself force a program to lie.
 
+## The fish keeps swimming
+
+The browser entry carries a value along two cycloid segments, one reflected,
+with adjustable relative angle, phase and pace. Swimming advances process time;
+NOT exchanges the branch labels at that same time. A geometric intersection
+never merges the labels: with asymmetry, the branches may reach it at different
+times. An unsettled `u` keeps its reason and both candidate branches. Dotted
+tails continue past the numerically located intersection; the process can
+advance beyond the displayed section.
+
+The fractal depth control repeats the whole fish on each of its two branches,
+forming a tree of smaller fish. Depth 0 shows the original; depth 6 shows 127
+copies, each generation at 55% of its parent's scale. Every copy inherits the
+angle, phase and pace. The marker stays on the original fish. This is a finite
+preview of a recursive construction; copy addresses do not add truth values.
+The reusable transforms are exported from `u/fish-fractal`.
+
+Like [Pando](https://www.fs.usda.gov/r04/fishlake/recreation/explore-forest/pando),
+the repeated forms suggest connection and a shared origin. This is an analogy;
+the fish is not a biological model of Pando or biodiversity.
+
+```js
+import {carry, swim, negate, positions, geometry} from 'u/fish';
+const later = swim(carry('0'), 1);
+later.value;                 // '0': movement does not change truth
+negate(later).value;         // '1': NOT exchanges the carried label
+const reference = geometry({angle: 0, phase: 0, pace: 1});
+positions(carry('u', 1, 'Read the recorded branch label.'), reference);
+// In the symmetric reference, two labelled candidates share the crossing.
+```
+
+This is a proposed geometric representation of state transport and negation.
+It does not make the fish a necessary shape of binary logic or define geometric
+AND and OR. The three existing values, U2/U5 encodings and behavior tape remain
+unchanged. Defaults of 3 degrees, phase 0.05 and pace 1.05 are adjustable
+illustrations, not measured constants. With asymmetry, NOT is generally not a
+simple reflection of the displayed point. Coordinates and intersection locations
+are approximate; `graphFor` exports the curve formulas for an exact calculator.
+[FISH.md](FISH.md) records the W/R/A account, correction and checks.
+
 ## What U has to do with Rod
 
 [Rod](https://chuumind.com/tools/misc/rod/) is intended as a gesture and bone-conduction
@@ -139,6 +179,16 @@ node --test "test/*.test.mjs"
 node build-browser.mjs --check
 ```
 
+With Playwright installed, `npm run test:browser` checks the fish controls and
+the actual offline download. `PLAYWRIGHT_MODULE` may name an existing Playwright
+module file; `BROWSERS=chromium,firefox,webkit` selects all three engines.
+
+To refresh an existing ChuuMind source copy, run
+`node build-browser.mjs --site PATH_TO_SITE`, then the same command with
+`--check`. It writes only this repository's browser build and the existing
+`nav/u/run.html`, preserving the site's `data-proportion` marker. It does not
+publish. The website's U explanation is maintained separately.
+
 These developer commands need their named runtimes. They are not the entry
 point for using U. Set `U_PYTHON` or `U_SHELL` to an
 interpreter executable if it is not on PATH. The checker resolves its inputs
@@ -181,4 +231,4 @@ device worktree now belongs to this repository on
 [W] Original U reflog commits are pinned under `history/u/reflog/`; other loose
 recovery objects use local `refs/local-recovery/u/objects/`. Those local refs and
 the hash receipt in `.git/consolidation/2026-10-02/` are not carried by a normal
-clone. No remote was updated. Owner instruction: AATM `ref:b3e9e0409bf9bcd4`.
+clone. No remote was updated during that consolidation.

@@ -8,6 +8,44 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-08
+
+### Added
+
+- [W] Run U's fractal depth control builds a branching tree of 1–127 cycloid
+  fish while retaining angle, phase, pace and the original carried state.
+  `u/fish-fractal` exports the reusable similarities. Four new tests pass
+  (46 total); keyboard depth changes and offline use pass in three browsers.
+  The screen identifies the construction as a finite preview.
+- [W] `u/fish` carries 0, 1 or a reasoned u through progress, preserves branch
+  identity at crossings, and delegates negation to U. The seven cases in
+  `test/fish.test.mjs` pass, including a regression for ineffective positive
+  advances at large floating-point progress.
+- [W] Run U has manual swimming, NOT, crossing inspection and restart, with
+  genuine cycloid segments, adjustable angle/phase/pace, dotted tails and two
+  labelled unsettled candidates. `checks/fish-browser.mjs`
+  passed in Chromium, Firefox and WebKit at 320/980px and through the actual
+  offline download. No page errors or HTTP requests were observed.
+- [A] The fish is a proposed representation of state transport and negation.
+  Defaults are illustrative. [FISH.md](FISH.md) records the account written
+  first, the owner's cycloid/asymmetry correction and fresh observations.
+- [W] The symmetric reference is a reflection at equal progress. The default
+  asymmetric branches meet at different process times; the bounded numerical
+  crossing search reports failure if it cannot locate a second intersection.
+  Exported `graphFor` expressions produced 640 enclosed cells in iDoMath's
+  actual calculator, with no unsettled cells.
+
+### Changed
+
+- [W] The browser builder includes the shared fish source and accepts `--site`
+  for an explicit existing-site export or comparison. Existing logic tables,
+  their 22-result tape and U2/U5 encodings are unchanged.
+
+### Not checked
+
+- Physical phones, assistive technology use and live deployment. This model
+  does not supply geometric AND/OR or establish that logic requires a fish.
+
 ## [1.2.1] - 2026-10-06
 
 ### Fixed

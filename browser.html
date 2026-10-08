@@ -20,6 +20,12 @@
   [data-face="1"]{border-color:#ba3737}[data-face="0"]{border-color:#356ac3}
   code,pre{font: .85rem/1.5 ui-monospace,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;word-break:break-word}
   summary{cursor:pointer;min-height:44px;padding:8px 0}.small{font-size:.88rem}.answer{font-size:1.35rem;font-weight:650}
+  #fish-graph{display:block;width:100%;height:auto;aspect-ratio:30/13;margin:12px 0;color:inherit}
+  #fish-state,#fish-error,#fish-intersection{overflow-wrap:anywhere}
+  .fish-branch{fill:none;stroke:currentColor;stroke-width:.012}.fish-tail{stroke-dasharray:.035 .035}
+  .fish-marker{fill:currentColor;stroke:currentColor;stroke-width:.012}
+  .fish-copy{opacity:.8}
+  #fish-markers[data-face="u"] .fish-marker{fill:none;stroke:#777;stroke-dasharray:.016 .012}
   @media(prefers-color-scheme:dark){:root{color:#f4f1ea;background:#17171b;color-scheme:dark}section,input,select,button{background:#25252b}button.primary{background:#f4f1ea;color:#25252b}}
   @media(forced-colors:active){[data-face]{border-color:CanvasText}button.primary{background:ButtonFace;color:ButtonText}}
 </style>
@@ -40,6 +46,30 @@
 <details><summary>Run the complete finite table</summary><button id="check" disabled>Run 22 checks</button>
 <p id="checks" role="status" data-face="u">U: the checks have not run.</p><pre id="tape"></pre>
 <p class="small">Three NOT results, nine AND results, nine OR results and refusal of u without a reason. A matching table does not prove authorship or every possible input.</p></details></section>
+<section aria-labelledby="fish-title"><h2 id="fish-title">Keep swimming</h2>
+<p>A fish carries a value along two branches: swimming keeps it, NOT exchanges 0 and 1, and u leaves the branch unsettled.</p>
+<svg id="fish-graph" viewBox="-1.15 -.55 3 1.1" role="img" aria-labelledby="fish-svg-title fish-svg-desc">
+<title id="fish-svg-title">A carried value on a continuing fish curve</title>
+<desc id="fish-svg-desc">Two mirrored cycloids with adjustable angle, phase and pace. A circle marks candidate 0; a square marks candidate 1. A crossing does not merge their identities.</desc>
+<defs><g id="fish-seed"></g></defs>
+<g transform="scale(1,-1)"><g id="fish-copies"></g><g id="fish-paths"></g><g id="fish-markers"></g></g></svg>
+<label>Fractal depth: <output id="fish-depth-label" for="fish-depth">3</output><input id="fish-depth" type="range" min="0" max="6" step="1" value="3" disabled></label>
+<p id="fish-recursion" class="small" role="status">The recursive picture has not been drawn.</p>
+<p class="small">Each fish carries two smaller copies on its branches. Depth 0 shows the original. The marker follows that original fish; the smaller copies keep the same angle, phase and pace.</p>
+<p class="small">Circle marker: 0. Square marker: 1. After the second intersection, each branch continues as a dotted tail. The displayed window covers progress 0 to 1.3; swimming can continue beyond it.</p>
+<p id="fish-intersection" class="small" role="status">U: the second intersection has not been checked.</p>
+<div class="inputs"><label>Relative angle (°)<input id="fish-angle" type="number" step="any" value="3"></label>
+<label>Branch 1 phase<input id="fish-phase" type="number" step="any" value="0.05"></label>
+<label>Branch 1 pace<input id="fish-pace" type="number" min="0" step="any" value="1.05"></label></div>
+<div class="actions"><button id="fish-geometry" disabled>Apply geometry</button><button id="fish-symmetric" disabled>Symmetric reference</button></div>
+<p class="small">The starting angle, phase and pace are illustrative choices. NOT exchanges branch labels at the same progress; it need not reflect the point across a screen axis.</p>
+<div class="inputs"><label>Carried value<select id="fish-value"><option>0</option><option>1</option><option>u</option></select></label>
+<label>Advance by<input id="fish-distance" type="number" min="0" step="any" value="0.1"></label></div>
+<label id="fish-reason-label" hidden>What observation would settle this u?<input id="fish-reason" value="Observe which branch was selected." autocomplete="off"></label>
+<div class="actions"><button id="fish-carry" disabled>Carry this value</button><button id="fish-swim" class="primary" disabled>Swim</button><button id="fish-not" disabled>NOT</button><button id="fish-crossing" disabled>At progress 1</button><button id="fish-restart" disabled>Restart at 0</button></div>
+<p id="fish-state" role="status" data-face="u">U: waiting for this browser to carry a state.</p>
+<p id="fish-error" role="alert" hidden></p>
+<details><summary>What this model claims</summary><p>The fish is a proposed picture of state transport and negation. It does not derive truth values from shapes or define geometric AND and OR. Coordinates are a floating-point illustration. The code and account are available below and in <a href="https://github.com/Justichuu/u/blob/main/FISH.md">the fish account</a>.</p></details></section>
 <section aria-labelledby="device-title"><h2 id="device-title">A fingerprint that returns</h2>
 <p id="device-status" role="status" data-face="u">U: starting the device protocol. Web Crypto must be available in this browser.</p>
 <p class="small">Public identifier: <code id="alias">u</code><br>Displayed fingerprint: <code id="fingerprint">u</code></p>
@@ -52,7 +82,7 @@
 <p class="small">The text stays in this page. Its receipt checks data integrity; it does not verify a person's identity or the truth of the text.</p></details></section>
 <details><summary>Read the code, credit and license</summary><p>Justichuu supplied the direction. Claude built the logic and consolidated the source; OpenAI Codex built the protocol and this browser entry. Other contributions stay unknown until supported by evidence.</p>
 <p><a href="https://github.com/Justichuu/u/blob/main/PROVENANCE.md">Full contribution record</a> · <a href="https://chuumind.com/u">U record</a></p>
-<h2>Logic source</h2><pre id="logic-source">/*U_SOURCE_TEXT*/</pre><h2>License</h2><pre>/*U_LICENSE_TEXT*/</pre></details>
+<h2>Logic source</h2><pre id="logic-source">/*U_SOURCE_TEXT*/</pre><h2>Fish source</h2><pre id="fish-source">/*U_FISH_SOURCE_TEXT*/</pre><h2>Fractal source</h2><pre id="fish-fractal-source">/*U_FRACTAL_SOURCE_TEXT*/</pre><h2>License</h2><pre>/*U_LICENSE_TEXT*/</pre></details>
 </main>
 <script>
 /* Built from the checked-in modules. No eval, external import or request. */
@@ -60,6 +90,16 @@ const originalHTML='<!doctype html>\n'+document.documentElement.outerHTML;
 const logic=(()=>{
 /*U_LOGIC*/
 return {u,not,and,or,tape,KNOWN};
+})();
+const fish=(()=>{
+const {u,not}=logic;
+/*U_FISH*/
+return {carry,swim,negate,point,positions,geometry,crossing,DEFAULT_GEOMETRY};
+})();
+const fishFractal=(()=>{
+const {point,geometry,DEFAULT_GEOMETRY}=fish;
+/*U_FRACTAL*/
+return {copies,mapPoint,FRACTAL_SCALE,MAX_DEPTH};
 })();
 const protocol=(()=>{
 /*U_PROTOCOL*/
@@ -86,6 +126,64 @@ for(const id of ['first','second','operation'])byId(id).onchange=inputs;
 byId('check').onclick=()=>{const got=logic.tape();byId('tape').textContent=got;say('checks',got===logic.KNOWN?'1':'0',got===logic.KNOWN?'1: 22 of 22 results match the published table in this browser.':'0: this result differs from the published table.');};
 byId('download').onclick=()=>{const url=URL.createObjectURL(new Blob([originalHTML],{type:'text/html;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Run-U.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);};
 combine();
+// Both the paths and carried markers use the shared fish module.
+const svgNS='http://www.w3.org/2000/svg';
+function svgElement(tag,attributes){const element=document.createElementNS(svgNS,tag);for(const [name,value] of Object.entries(attributes))element.setAttribute(name,String(value));return element;}
+let carried=fish.carry('0'),fishGeometry=fish.DEFAULT_GEOMETRY,fractalDepth=3;
+const numberText=n=>Number(n.toPrecision(6)).toString();
+function drawGeometry(options,depth=fractalDepth){
+ const next=fish.geometry(options),hit=fish.crossing(next),paths=[],samples=[];
+ const copies=fishFractal.copies(depth,next);
+ for(const value of ['0','1']){
+  const split=hit?.[value==='0'?'first':'second'];
+  const spans=split>0&&split<1.3?[[0,split,false],[split,1.3,true]]:[[0,1.3,false]];
+  for(const [low,high,tail] of spans){
+   const points=Array.from({length:121},(_,i)=>{const p=fish.point(low+(high-low)*i/120,value,next);samples.push(p);return `${i?'L':'M'}${p.x},${p.y}`;}).join(' ');
+   paths.push(svgElement('path',{d:points,class:'fish-branch'+(tail?' fish-tail':''),'data-value':value}));
+  }
+ }
+ if(carried.progress<=1.3)fish.positions(carried,next);
+ const xs=samples.map(p=>p.x),ys=samples.map(p=>p.y);
+ const corners=[Math.min(...xs),Math.max(...xs)].flatMap(x=>[Math.min(...ys),Math.max(...ys)].map(y=>({x,y})));
+ const bounds=copies.flatMap(copy=>corners.map(p=>fishFractal.mapPoint(copy,p)));
+ const left=Math.min(...bounds.map(p=>p.x)),right=Math.max(...bounds.map(p=>p.x)),bottom=Math.min(...bounds.map(p=>p.y)),top=Math.max(...bounds.map(p=>p.y));
+ const pad=Math.max(right-left,top-bottom,.1)*.06;
+ const children=copies.slice(1).map(copy=>svgElement('use',{href:'#fish-seed',class:'fish-copy','data-address':copy.address,transform:`matrix(${copy.a} ${copy.b} ${-copy.b} ${copy.a} ${copy.x} ${copy.y})`}));
+ fishGeometry=next;fractalDepth=depth;byId('fish-paths').replaceChildren(...paths);
+ byId('fish-seed').replaceChildren(...paths.map(path=>path.cloneNode(true)));
+ byId('fish-copies').replaceChildren(...children);
+ byId('fish-depth').value=depth;byId('fish-depth-label').textContent=depth;
+ byId('fish-recursion').textContent=`Depth ${depth}: ${copies.length} fish. Each child is ${fishFractal.FRACTAL_SCALE*100}% of its parent. This is a finite preview of a continuing recursive construction.`;
+ byId('fish-graph').setAttribute('viewBox',`${left-pad} ${-top-pad} ${right-left+2*pad} ${top-bottom+2*pad}`);
+ byId('fish-intersection').textContent=hit?`Approximate second intersection: branch 0 at ${numberText(hit.first)}, branch 1 at ${numberText(hit.second)}; (${numberText(hit.x)}, ${numberText(hit.y)}). Equal progress need not place both markers there.`:'No second intersection found in the displayed window. Both branches remain solid; this search does not establish that they never meet.';
+ for(const name of ['angle','phase','pace'])byId('fish-'+name).value=next[name];
+ renderFish();
+}
+function renderFish(){
+ const markers=byId('fish-markers');markers.replaceChildren();markers.dataset.face=carried.value;
+ const visible=carried.progress<=1.3,candidates=visible?fish.positions(carried,fishGeometry):[];
+ for(const p of candidates){
+  const marker=svgElement(p.value==='0'?'circle':'rect',p.value==='0'?{cx:p.x,cy:p.y,r:.045}:{x:p.x-.06,y:p.y-.06,width:.12,height:.12});
+  marker.setAttribute('class','fish-marker');marker.setAttribute('data-value',p.value);
+  const title=svgElement('title',{});title.textContent=`${carried.value==='u'?'Unsettled candidate ':'Value '}${p.value}`;marker.append(title);markers.append(marker);
+ }
+ const position=visible?candidates.map(p=>`${carried.value==='u'?'Candidate ':''}${p.value}: (${numberText(p.x)}, ${numberText(p.y)})`).join('; '):'Beyond the displayed window; the carried value remains present.';
+ say('fish-state',carried.value,`${carried.value} · progress ${numberText(carried.progress)} · ${position}${carried.value==='u'?' · Neither branch selected. To settle: '+carried.reason:''}`);
+ byId('fish-value').value=carried.value;byId('fish-reason-label').hidden=carried.value!=='u';
+}
+function fishAction(action){try{carried=action();byId('fish-error').hidden=true;renderFish();}catch(error){byId('fish-error').textContent=error.message;byId('fish-error').hidden=false;}}
+function geometryAction(options,depth=fractalDepth){try{drawGeometry(options,depth);byId('fish-error').hidden=true;}catch(error){byId('fish-error').textContent=error.message;byId('fish-error').hidden=false;}}
+byId('fish-depth').oninput=()=>geometryAction(fishGeometry,Number(byId('fish-depth').value));
+byId('fish-geometry').onclick=()=>geometryAction(Object.fromEntries(['angle','phase','pace'].map(name=>[name,byId('fish-'+name).value.trim()?Number(byId('fish-'+name).value):NaN])));
+byId('fish-symmetric').onclick=()=>geometryAction({angle:0,phase:0,pace:1});
+byId('fish-value').onchange=()=>{byId('fish-reason-label').hidden=byId('fish-value').value!=='u';};
+byId('fish-carry').onclick=()=>fishAction(()=>fish.carry(byId('fish-value').value,carried.progress,byId('fish-reason').value));
+byId('fish-swim').onclick=()=>fishAction(()=>{const distance=byId('fish-distance');if(!distance.value.trim()||!distance.checkValidity())throw Error('Enter a finite, nonnegative distance.');return fish.swim(carried,Number(distance.value));});
+byId('fish-not').onclick=()=>fishAction(()=>fish.negate(carried));
+byId('fish-crossing').onclick=()=>fishAction(()=>fish.carry(carried.value,1,carried.reason));
+byId('fish-restart').onclick=()=>fishAction(()=>fish.carry(carried.value,0,carried.reason));
+for(const id of ['fish-carry','fish-swim','fish-not','fish-crossing','fish-restart','fish-geometry','fish-symmetric','fish-depth'])byId(id).disabled=false;
+drawGeometry(fishGeometry);
 (async()=>{
  try{
   const device=await protocol.createU();let timer;

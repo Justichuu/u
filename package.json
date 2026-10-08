@@ -1,6 +1,6 @@
 {
   "name": "u",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Three-valued logic, a finite behavior fingerprint, and a device protocol with scoped evidence and timed display return.",
   "license": "LicenseRef-U-Device-1.0 OR MIT",
   "type": "module",
@@ -10,11 +10,14 @@
     "./protocol": "./u.mjs",
     "./audio": "./audio.mjs",
     "./u2": "./u2.js",
-    "./u5": "./u5.js"
+    "./u5": "./u5.js",
+    "./fish": "./fish.js",
+    "./fish-fractal": "./fish-fractal.js"
   },
   "scripts": {
     "build": "node build-browser.mjs",
     "test": "node verify.mjs && node --test \"test/*.test.mjs\"",
+    "test:browser": "node checks/fish-browser.mjs",
     "burn": "node burn.mjs"
   },
   "keywords": [
