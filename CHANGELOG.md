@@ -8,6 +8,19 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.3.3] - 2026-10-08
+
+### Fixed
+
+- [W] Run U's fish note now describes its window as "from 0 to one and three
+  tenths". The code keeps its numeric values. All 46 Node tests, three runtime
+  tapes and Chromium, Firefox and WebKit interaction checks pass, including
+  the offline download. The browser entries match their source.
+- [W] Python gzip at level 9 measures 15,928 bytes, up from 15,919 in 1.3.2.
+  The existing 14,600-byte site budget
+  remains exceeded. This is a local compression measurement, not a measured
+  hosted transfer. Physical-phone and assistive-technology use remain unchecked.
+
 ## [1.3.2] - 2026-10-08
 
 ### Fixed
