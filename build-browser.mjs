@@ -15,10 +15,14 @@ const protocol=read('u.mjs').replace(/^export /gm,'');
 const fishSource=read('fish.js');
 const fish=fishSource.replace(/^import .*$/gm,'').replace(/^export /gm,'');
 if(/\bimport\s/.test(fish))throw Error('Review the fish imports before bundling.');
+const fractalSource=read('fish-fractal.js');
+const fractal=fractalSource.replace(/^import .*$/gm,'').replace(/^export /gm,'');
+if(/\bimport\s/.test(fractal))throw Error('Review the fractal imports before bundling.');
 const html=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const built=read('browser.html').replace('/*U_SOURCE_TEXT*/',()=>html(source)).replace('/*U_LICENSE_TEXT*/',()=>html(read('LICENSE')))
  .replace('/*U_FISH_SOURCE_TEXT*/',()=>html(fishSource))
- .replace('/*U_LOGIC*/',()=>logic).replace('/*U_PROTOCOL*/',()=>protocol).replace('/*U_FISH*/',()=>fish);
+ .replace('/*U_FRACTAL_SOURCE_TEXT*/',()=>html(fractalSource))
+ .replace('/*U_LOGIC*/',()=>logic).replace('/*U_PROTOCOL*/',()=>protocol).replace('/*U_FISH*/',()=>fish).replace('/*U_FRACTAL*/',()=>fractal);
 const targets=[[new URL('run.html',import.meta.url),built]];
 if(site){
  // Only an existing U entry can be updated. Keep its explicit site opt-in.

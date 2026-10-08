@@ -11,7 +11,8 @@
     "./audio": "./audio.mjs",
     "./u2": "./u2.js",
     "./u5": "./u5.js",
-    "./fish": "./fish.js"
+    "./fish": "./fish.js",
+    "./fish-fractal": "./fish-fractal.js"
   },
   "scripts": {
     "build": "node build-browser.mjs",

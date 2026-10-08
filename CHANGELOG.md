@@ -10,6 +10,11 @@ Not checked says what was not, and the one thing that would settle it.
 
 ### Added
 
+- [W] Run U's fractal depth control builds a branching tree of 1–127 cycloid
+  fish while retaining angle, phase, pace and the original carried state.
+  `u/fish-fractal` exports the reusable similarities. Four new tests pass
+  (46 total); keyboard depth changes and offline use pass in three browsers.
+  The screen identifies the construction as a finite preview.
 - [W] `u/fish` carries 0, 1 or a reasoned u through progress, preserves branch
   identity at crossings, and delegates negation to U. The seven cases in
   `test/fish.test.mjs` pass, including a regression for ineffective positive

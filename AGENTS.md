@@ -25,3 +25,8 @@ point; a geometric crossing never decides a truth value. Defaults are examples.
 [W] 42 Node cases and three browser engines passed. The calculator enclosed
 640 cells of the corrected pair. Local source/site copies are checked by
 `build-browser.mjs --check --site PATH`; none of this asserts publication.
+
+[W] Fractal continuation adds `fish-fractal.js`: fixed similarities, a retained
+seed at every level, depth 0–6 and 1–127 copies. Branching makes a tree of fish.
+Copy addresses are not truth values; the original marker remains the state
+reference. All 46 Node cases and the updated three-browser checks pass.

@@ -219,3 +219,43 @@ enclosed all 640 cells, with zero unsettled cells; record digest
 The calculator screenshot was visually inspected. Its native tails remain
 solid proof boxes; the interactive U view supplies dotted continuation.
 No independent parametric witness or exact intersection proof was run.
+
+## Fractal continuation: design before implementation
+
+[A] The requested fractal mode will repeat the complete cycloid fish at smaller
+scales. Two fixed similarities attach each child's head to a point on a parent
+branch. Every copy inherits the chosen angle, phase and pace. A depth control
+shows finite approximations; depth zero retains the original fish.
+
+[A] Start with scale 0.55, attachment progress 0.28 on branch 0 and 0.68 on
+branch 1, and rotations +30 degrees and -30 degrees plus the relative angle.
+These are illustrative design choices. Each map is reused at every level.
+
+[R] Since the similarity scale is less than one, repeated copies shrink.
+The infinite construction is the compact limit of the seed fish together
+with its recursively transformed copies. The screen shows a bounded finite
+depth, not infinitely many pixels. Overlap has not been excluded, so no exact
+fractal dimension is asserted from the two-map count alone.
+
+[A] Recursive addresses identify copies, not truth values. Swimming and NOT
+retain their existing state contract; the original fish's marker remains the
+state reference. Checks will cover shrinking, head attachment, transform
+composition, depth bounds, input refusal, existing logic and browser controls.
+
+## Fractal observations
+
+[W] `fish-fractal.js` supplies the two similarities and bounded recursive copies.
+Four new tests cover all depths 0–6, 1–127 copies, contraction, head attachment,
+parent/child composition, inherited phase and angle, and invalid inputs. All
+46 Node tests pass; the three runtime behavior tapes remain identical.
+
+[W] Chromium, Firefox and WebKit passed the depth control with the keyboard,
+unchanged carried state, inherited geometry, the existing fish interactions,
+320/980px layouts and the actual offline download. Depths 3 and 6 were captured;
+the Chromium images were visually inspected. The smaller fish branch from
+their parents into a tree. No native-calculator check of this recursion was run.
+
+[R] Writing S for the displayed seed and T0, T1 for the two similarities, the
+infinite construction satisfies F = S union T0(F) union T1(F). Including S
+retains the fish at every generation. This is a condensation construction;
+the finite display includes all generations through the chosen depth.

@@ -30,6 +30,13 @@ times. An unsettled `u` keeps its reason and both candidate branches. Dotted
 tails continue past the numerically located intersection; the process can
 advance beyond the displayed section.
 
+The fractal depth control repeats the whole fish on each of its two branches,
+forming a tree of smaller fish. Depth 0 shows the original; depth 6 shows 127
+copies, each generation at 55% of its parent's scale. Every copy inherits the
+angle, phase and pace. The marker stays on the original fish. This is a finite
+preview of a recursive construction; copy addresses do not add truth values.
+The reusable transforms are exported from `u/fish-fractal`.
+
 ```js
 import {carry, swim, negate, positions, geometry} from 'u/fish';
 const later = swim(carry('0'), 1);

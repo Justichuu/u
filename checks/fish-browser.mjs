@@ -20,6 +20,22 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   const state=()=>page.locator('#fish-state').textContent();
   const click=id=>page.locator('#fish-'+id).click();
   assert.match(await state(),/^0 · progress 0/);
+  assert.equal(await page.locator('#fish-depth').inputValue(),'3');
+  assert.equal(await page.locator('#fish-copies use').count(),14);
+  assert.match(await page.locator('#fish-recursion').textContent(),/15 fish.*finite preview/);
+  const originalState=await state();
+  if(output)await page.locator('#fish-graph').screenshot({path:resolve(output,`u-fish-${name}-fractal-3.png`)});
+  await page.locator('#fish-depth').focus();await page.keyboard.press('End');
+  assert.equal(await page.locator('#fish-copies use').count(),126);
+  assert.match(await page.locator('#fish-recursion').textContent(),/127 fish/);
+  assert.equal(await state(),originalState);
+  if(output)await page.locator('#fish-graph').screenshot({path:resolve(output,`u-fish-${name}-fractal-6.png`)});
+  await page.keyboard.press('Home');
+  assert.equal(await page.locator('#fish-copies use').count(),0);
+  assert.match(await page.locator('#fish-recursion').textContent(),/Depth 0: 1 fish/);
+  await page.keyboard.press('ArrowRight');
+  assert.equal(await page.locator('#fish-copies use').count(),2);
+  assert.equal(await state(),originalState);
   assert.equal(await page.locator('#fish-paths path').count(),4);
   assert.equal(await page.locator('#fish-paths .fish-tail').count(),2);
   assert.equal(await page.locator('#fish-angle').inputValue(),'3');
@@ -52,10 +68,13 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   assert.match(await state(),/^1 · progress 1.1/);assert.equal(await page.locator('#fish-markers rect').count(),1);
   const branch=()=>page.locator('#fish-paths [data-value="1"]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('d')).join(''));
   let prior=await branch();
+  let copyBefore=await page.locator('#fish-copies use[data-address="1"]').getAttribute('transform');
   for(const [control,value] of [['angle','7'],['phase','0.09'],['pace','0.9']]){
    await page.locator('#fish-'+control).fill(value);await click('geometry');
    assert.equal(await page.locator('#fish-error').isVisible(),false);assert.notEqual(await branch(),prior);
    assert.match(await state(),/^1 · progress 1.1/);prior=await branch();
+   const copyAfter=await page.locator('#fish-copies use[data-address="1"]').getAttribute('transform');
+   assert.notEqual(copyAfter,copyBefore);copyBefore=copyAfter;
   }
   await page.locator('#fish-pace').fill('0');await click('geometry');
   assert.equal(await page.locator('#fish-error').isVisible(),true);assert.equal(await branch(),prior);
@@ -79,8 +98,9 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   const downloadPromise=page.waitForEvent('download');await page.locator('#download').click();const download=await downloadPromise;
   const downloaded=join(temporary,'Run-U.html');await download.saveAs(downloaded);
   const offline=await browser.newPage();await offline.goto(pathToFileURL(downloaded).href);
+  assert.equal(await offline.locator('#fish-copies use').count(),14);
   await offline.locator('#fish-crossing').click();assert.match(await offline.locator('#fish-state').textContent(),/^0 · progress 1/);
   await offline.close();assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);
-  console.log(`1: ${name} cycloid angle/phase/pace, symmetric reference, u reason/candidates, NOT, continuation, invalid inputs, restart, finite tape, 320/980px and offline download.`);
+  console.log(`1: ${name} fractal keyboard depth0/1/3/6, phase propagation, cycloid controls, state preservation, finite tape, 320/980px and offline download.`);
  }finally{await browser.close();await rm(temporary,{recursive:true,force:true});}
 }
