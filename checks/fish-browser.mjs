@@ -25,16 +25,20 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   assert.equal(await page.locator('#fish-depth').evaluate(el=>el.labels.length),1,'Depth slider must be associated with its label');
   assert.equal(await page.locator('#fish-copies use').count(),14);
   assert.match(await page.locator('#fish-recursion').textContent(),/15 fish.*finite preview/);
+  const readableScale=async()=>assert.match(await page.locator('#fish-recursion').textContent(),/Each child is 55% of its parent\./);
+  await readableScale();
   const originalState=await state();
   if(output)await page.locator('#fish-graph').screenshot({path:resolve(output,`u-fish-${name}-fractal-3.png`)});
   await page.locator('#fish-depth').focus();await page.keyboard.press('End');
   assert.equal(await page.locator('#fish-copies use').count(),126);
   assert.match(await page.locator('#fish-recursion').textContent(),/127 fish/);
+  await readableScale();
   assert.equal(await state(),originalState);
   if(output)await page.locator('#fish-graph').screenshot({path:resolve(output,`u-fish-${name}-fractal-6.png`)});
   await page.keyboard.press('Home');
   assert.equal(await page.locator('#fish-copies use').count(),0);
   assert.match(await page.locator('#fish-recursion').textContent(),/Depth 0: 1 fish/);
+  await readableScale();
   await page.keyboard.press('ArrowRight');
   assert.equal(await page.locator('#fish-copies use').count(),2);
   assert.equal(await state(),originalState);
@@ -101,6 +105,7 @@ for(const name of (process.env.BROWSERS||'chromium').split(',')){
   const downloaded=join(temporary,'Run-U.html');await download.saveAs(downloaded);
   const offline=await browser.newPage();await offline.goto(pathToFileURL(downloaded).href);
   assert.equal(await offline.locator('#fish-copies use').count(),14);
+  assert.match(await offline.locator('#fish-recursion').textContent(),/Each child is 55% of its parent\./);
   await offline.locator('#fish-crossing').click();assert.match(await offline.locator('#fish-state').textContent(),/^0 · progress 1/);
   await offline.close();assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);
   console.log(`1: ${name} fractal keyboard depth0/1/3/6, phase propagation, cycloid controls, state preservation, finite tape, 320/980px and offline download.`);

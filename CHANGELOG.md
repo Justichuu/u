@@ -8,6 +8,15 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-10-08
+
+### Fixed
+
+- [W] The child-scale readout now says 55%, using the existing number
+  formatter instead of exposing floating-point residue. The browser
+  regression failed before the fix and checks depths 0, 3 and 6 plus the
+  actual offline download. Geometry and logic are unchanged.
+
 ## [1.3.1] - 2026-10-08
 
 ### Fixed
