@@ -8,6 +8,15 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+### Added
+
+- [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
+  Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
+  Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit
+  carries none, one or two u in front of it). Counted over every stream on 9 October 2026: 5 bits make 672
+  u-bytes by `whole` (32 bit values times 21 placements), 4 bits make 1296 by `every` (16 times 81);
+  `test/u-byte.test.mjs` keeps those counts. Built on u.js; no table of its own.
+
 ## [1.3.3] - 2026-10-08
 
 ### Fixed
