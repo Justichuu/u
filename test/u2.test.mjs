@@ -33,3 +33,7 @@ test('a control that must fail: one witness short of agreement is not 1', () => 
   assert.notEqual(agree('1', '1', 'u'), '1');
   assert.notEqual(agree('1', '0', '1'), '1');
 });
+
+test('a u-bit is one of u\'s faces, never an inherited name or a look-alike (audit Q030, 8 Oct 2026)', () => {
+  for (const t of ['toString', 'constructor', ['1'], 1, null, undefined]) assert.throws(() => pack('1', '0', t), /u-bit says/);
+});

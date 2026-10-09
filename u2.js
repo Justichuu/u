@@ -8,7 +8,7 @@
 // It packs into four bits, a byte smaller than a byte: bit, bit, then the u-bit in two bits.
 // 11 is 1, 10 is 0, 00 is u, and 01 is refused, as u refuses a u that names nothing.
 
-import { u, not, and } from "./u.js";
+import { u, not, and, faces } from "./u.js";
 
 const bit = b => { if (b !== "1" && b !== "0") throw new TypeError("a bit says 1 or 0"); return b; };
 
@@ -24,7 +24,7 @@ const UBIT = { "1": 0b11, "0": 0b10, u: 0b00 };
 // Four bits as a number from 0 to 15: first bit, second bit, then the u-bit's two.
 export const pack = (first, second, third) => {
   bit(first); bit(second);
-  if (!(third in UBIT)) throw new TypeError("a u-bit says 1, 0 or u");
+  if (!faces.includes(third)) throw new TypeError("a u-bit says 1, 0 or u");   // u's faces: never "toString" or ["1"]
   return (Number(first) << 3) | (Number(second) << 2) | UBIT[third];
 };
 
