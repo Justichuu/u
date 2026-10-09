@@ -103,6 +103,21 @@ pack('1', '1', '1');   // 15, all three agree on 1
 unpack(0b0110);        // ['0', '1', '0']
 ```
 
+## U6
+
+Justichuu, 8 October 2026: "two 3 value logics mirroring 3 2 value logics to be 6 value logic
+through binary logic of 2 logics = 6?" Two 3-value logics, the method's halves `chuu` and `chau`, each
+with u's faces, make six values; read across, the same six are three 2-value logics, each face from
+either half. Inside one half, not, and and or are u's own; across halves the move is the mirror. Odd
+logic is weirder than even: u's not keeps `u` as it was, and the mirror keeps no value as it was.
+`u6.js` builds on `u.js` and holds no table of its own.
+
+```js
+import {u6, mirror, and6} from './u6.js';
+mirror(u6('chuu', '1'));                  // ['chau', '1']
+and6(u6('chau', '1'), u6('chau', 'u'));   // ['chau', 'u']
+```
+
 ## Optional: use the logic in your own code
 
 ```js
