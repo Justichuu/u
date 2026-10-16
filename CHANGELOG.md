@@ -15,6 +15,9 @@ Not checked says what was not, and the one thing that would settle it.
   combination of answers could need is ever dropped (every formula to depth 2, 7320 of them, and 3000 sampled at
   depth 4, checked against every answer); one step keeps exactly the u's that could change it. Faces are u's own.
   Not checked: the Python and shell ports do not carry reasons yet.
+- [W] Is it settled? (`settled` in `why.js`): asked of the knowing, not the value: 1 when a value is 1 or 0, 0 when
+  it is u, never u. u's not, and and or build 197 of the 19683 rules over two inputs; with `settled` they build all
+  19683 (both counted by the tests). It keeps what would change it, so a 1 or 0 with reasons is known now, not final.
 - [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
   Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
   Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit
