@@ -103,12 +103,12 @@ test('faces are u\'s own, and a final input leaves nothing to change', () => {
 });
 
 test('is it settled? asks of the knowing: 1 or 0 now, never u, and it keeps what would change it', () => {
-  assert.deepEqual(why.settled(why.known('1')), {face: '1', why: []});
-  assert.deepEqual(why.settled(why.known('0')), {face: '1', why: []});
-  assert.deepEqual(why.settled(why.unknown('is the door locked?')), {face: '0', why: ['is the door locked?']});
+  assert.deepEqual(why.settled(why.known('1')), {face: '1', why: [], by: []});
+  assert.deepEqual(why.settled(why.known('0', 'iDoMath')), {face: '1', why: [], by: ['iDoMath']});
+  assert.deepEqual(why.settled(why.unknown('is the door locked?')), {face: '0', why: ['is the door locked?'], by: []});
   const door = why.unknown('is the door locked?');
-  assert.deepEqual(why.not(why.settled(door)), {face: '1', why: ['is the door locked?']});   // "is it unknown?" is known: 1
-  assert.deepEqual(why.and(why.settled(door), why.known('0')), {face: '0', why: []});        // a final 0 decides
+  assert.deepEqual(why.not(why.settled(door)), {face: '1', why: ['is the door locked?'], by: []});   // "is it unknown?" is known: 1
+  assert.deepEqual(why.and(why.settled(door), why.known('0')), {face: '0', why: [], by: []});        // a final 0 decides
 });
 
 test('U alone builds 197 of the 19683 two-input rules; with "is it settled?" it builds all 19683', () => {
@@ -149,7 +149,7 @@ test('where a NaN payload is not promised: both reasons survive, in order, once 
   let x = door;
   for (let i = 0; i < 1000; i++) x = why.and(x, why.known('1'));
   assert.deepEqual([x.face, x.why], ['u', ['is the door locked?']]);
-  assert.deepEqual(why.and(why.and(door, alarm), why.known('0')), {face: '0', why: []});
+  assert.deepEqual(why.and(why.and(door, alarm), why.known('0')), {face: '0', why: [], by: []});
 });
 
 test('a u with no reason, or a reason that names nothing, is refused', () => {
@@ -183,10 +183,10 @@ test('three witnesses are one answer: all say it, or u; the U2-byte\'s own rule 
 
 test('a disagreement names who said what; a u witness keeps its reasons; agreeing final witnesses are final', () => {
   assert.deepEqual(why.witnesses({iDoMath: why.known('1'), sensor: why.known('0'), person: why.known('1')}),
-    {face: 'u', why: ['iDoMath says 1, sensor says 0, person says 1']});
+    {face: 'u', why: ['iDoMath says 1, sensor says 0, person says 1'], by: ['iDoMath', 'sensor', 'person']});
   assert.deepEqual(why.witnesses({iDoMath: why.known('1'), sensor: why.unknown('is the sensor plugged in?'), person: why.known('1')}),
-    {face: 'u', why: ['is the sensor plugged in?']});
-  assert.deepEqual(why.witnesses({iDoMath: why.known('0'), sensor: why.known('0'), person: why.known('0')}), {face: '0', why: []});
+    {face: 'u', why: ['is the sensor plugged in?'], by: ['iDoMath', 'sensor', 'person']});
+  assert.deepEqual(why.witnesses({iDoMath: why.known('0'), sensor: why.known('0'), person: why.known('0')}), {face: '0', why: [], by: ['iDoMath', 'sensor', 'person']});
   assert.throws(() => why.witnesses({}), /at least one witness/);
 });
 
@@ -204,16 +204,60 @@ test('a majority vote, or a witness ignored for being u, breaks the rule, so the
 test('settle asks every settler each question; a throw or a bare u is heard as u, never as an answer', () => {
   const sure = q => (q === '2+2 = 4' ? why.known('1') : q === '2+2 = 5' ? why.known('0') : why.unknown(`no way to check "${q}"`));
   const both = (ask) => why.and(ask('2+2 = 4'), ask('is the door locked?'));
-  assert.deepEqual(why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: sure, sensor: sure}), {face: '1', why: []});
-  assert.deepEqual(why.settle(ask => ask('2+2 = 5'), {iDoMath: sure, person: sure}), {face: '0', why: []});
+  assert.deepEqual(why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: sure, sensor: sure}),
+    {face: '1', why: [], by: ['iDoMath: 2+2 = 4', 'person: 2+2 = 4', 'sensor: 2+2 = 4']});
+  assert.deepEqual(why.settle(ask => ask('2+2 = 5'), {iDoMath: sure, person: sure}), {face: '0', why: [], by: ['iDoMath: 2+2 = 5', 'person: 2+2 = 5']});
   const door = why.settle(both, {iDoMath: sure, person: sure});
-  assert.deepEqual(door, {face: 'u', why: ['is the door locked?', 'no way to check "is the door locked?"']});
+  assert.deepEqual(door, {face: 'u', why: ['is the door locked?', 'no way to check "is the door locked?"'],
+    by: ['iDoMath: 2+2 = 4', 'person: 2+2 = 4', 'iDoMath: is the door locked?', 'person: is the door locked?']});
   const throws = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, sensor: () => { throw new Error('unplugged'); }});
-  assert.deepEqual(throws, {face: 'u', why: ['2+2 = 4', 'sensor did not answer "2+2 = 4": unplugged']});
+  assert.deepEqual(throws, {face: 'u', why: ['2+2 = 4', 'sensor did not answer "2+2 = 4": unplugged'], by: ['iDoMath: 2+2 = 4', 'sensor: 2+2 = 4']});
   const bare = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: () => ({face: 'u', why: []})});
   assert.equal(bare.face, 'u');
   assert.match(bare.why[1], /person did not answer "2\+2 = 4": a value is/);
   const split = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: () => why.known('0')});
-  assert.deepEqual(split, {face: 'u', why: ['2+2 = 4', 'iDoMath says 1, person says 0']});
+  assert.deepEqual(split, {face: 'u', why: ['2+2 = 4', 'iDoMath says 1, person says 0'], by: ['iDoMath: 2+2 = 4', 'person: 2+2 = 4']});
   assert.throws(() => why.settle(ask => ask(''), {iDoMath: sure}), /names the one observation/);
+});
+
+// Who answered: each question answered by two fake witnesses, each saying 1, 0 or u. Two answer tables that agree on
+// every "witness: question" named in by, and on every question named in why, must give the same face.
+const WITNESSES = ['first', 'second'], CELLS = q => WITNESSES.map(w => `${w}: ${q}`);
+const fakes = table => Object.fromEntries(WITNESSES.map(w => [w, q => table[`${w}: ${q}`] === 'u'
+  ? why.unknown(`${w} cannot tell ${q}`) : why.known(table[`${w}: ${q}`])]));
+const asked = (ops, f, ask) => typeof f === 'string' ? (f === '1' || f === '0' ? ops.known(f) : ask(f))
+  : f.length === 2 ? ops[f[0]](asked(ops, f[1], ask)) : ops[f[0]](asked(ops, f[1], ask), asked(ops, f[2], ask));
+function namesWrong(ops, formulas) {
+  const bad = [];
+  for (const f of formulas) {
+    const qs = [...new Set(reasonsIn(f))], cells = qs.flatMap(CELLS), tables = answers(cells);
+    const outs = tables.map(table => ops.settle(ask => asked(ops, f, ask), fakes(table)));
+    // For each table: the answers it names. Every table that agrees with it there must give its face.
+    const named = outs.map(out => cells.filter(c => out.by.includes(c) || out.why.includes(c.split(': ')[1])));
+    const groups = new Map();   // the named cells -> (those cells' answers -> faces seen over every table)
+    for (const n of new Set(named.map(n => n.join('|')))) {
+      const cs = n ? n.split('|') : [], faces = new Map();
+      tables.forEach((t, i) => { const k = cs.map(c => t[c]).join(''); faces.set(k, (faces.get(k) || new Set()).add(outs[i].face)); });
+      groups.set(n, faces);
+    }
+    if (tables.some((t, i) => groups.get(named[i].join('|')).get(named[i].map(c => t[c]).join('')).size > 1)) bad.push(f);
+  }
+  return bad;
+}
+
+test('by names every answer the face rests on: tables that agree there give the same face', () => {
+  assert.deepEqual(namesWrong(why, depth1), []);
+  assert.deepEqual(namesWrong(why, sample(3, 300, 17102026).filter(f => !JSON.stringify(f).includes('witnesses'))), []);
+});
+
+test('an and that drops the second input\'s answers is caught, so the check can fail', () => {
+  const dropsSecond = {...why, and: (a, b) => { const out = why.and(a, b); return out.face === '1' ? {...out, by: [...a.by]} : out; }};
+  assert.ok(namesWrong(dropsSecond, depth1).length > 0, 'a by missing the second answer went unseen');
+});
+
+test('a witness is named by a sentence, and a settler\'s answer may come without by', () => {
+  assert.deepEqual(why.known('1', 'iDoMath').by, ['iDoMath']);
+  assert.throws(() => why.known('1', ''), /a witness is named/);
+  assert.throws(() => why.not({face: '1', why: [], by: ['']}), /a value is/);
+  assert.deepEqual(why.settle(ask => ask('2+2 = 4'), {iDoMath: () => ({face: '1', why: []})}).by, ['iDoMath: 2+2 = 4']);
 });

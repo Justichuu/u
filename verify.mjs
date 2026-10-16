@@ -56,6 +56,26 @@ for (const [name, [cmd, args]] of ports) {
   say(got === KNOWN ? "1" : "0", name, got);
 }
 
+const tapeGrey = grey;   // the runtimes measured are counted from the tape ports alone
+
+// Reasons travel the same in both ports (why.js, why.py): one list of formulas to each, their answers compared byte
+// for byte. Two levels of not, settled, and and or over two questions and 1 and 0, and three witnesses over each.
+console.log("\nreasons, once per port\n");
+const atoms = ["r", "s", "1", "0"];
+const grow = ps => [...ps.flatMap(p => [["not", p], ["settled", p]]), ...ps.flatMap(a => ps.flatMap(b => [["and", a, b], ["or", a, b]]))];
+const level1 = [...atoms, ...grow(atoms)];
+const formulas = [...level1, ...grow(level1), ...atoms.flatMap(a => atoms.flatMap(b => atoms.map(c => ["witnesses", { first: a, second: b, third: c }])))];
+const heard = [];
+for (const [name, [cmd, args]] of [["why.js  node", [process.execPath, ["why.js"]]], ["why.py  python", [ports[1][1][0], ["why.py"]]]]) {
+  try {
+    heard.push(execFileSync(cmd, args, { cwd, input: JSON.stringify(formulas), encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim());
+  } catch (err) {
+    if (err.code === 'ENOENT') say("u", name, "runtime not found; provide its path with U_PYTHON and rerun");
+    else say("0", name, `runtime failed: ${err.code || 'exit ' + err.status}`);
+  }
+}
+if (heard.length === 2) say(heard[0] === heard[1] ? "1" : "0", "why.js and why.py give the same answers", `${formulas.length} formulas`);
+
 console.log("\nwhat the tape has to be\n");
 say(tape() === KNOWN ? "1" : "0", "tape is the published 22 characters", KNOWN);
 say(createHash("sha256").update(KNOWN).digest("hex").slice(0, 12) === KEY ? "1" : "0", "key is the hash of the tape", KEY);
@@ -70,8 +90,8 @@ say(or("u", not("u")) === "u" && and("u", not("u")) === "u" ? "1" : "0",
 // The last line never rounds a grey up. "Nothing failed" and "everything was
 // looked at" are different results, and a reader who only reads this line is
 // entitled to both.
-const runtimes = ports.length, measured = runtimes - grey;
-const coverage = `${measured} of ${runtimes} runtimes measured` + (grey ? `, ${grey} u` : "");
+const runtimes = ports.length, measured = runtimes - tapeGrey;
+const coverage = `${measured} of ${runtimes} runtimes measured` + (tapeGrey ? `, ${tapeGrey} u` : "");
 if (bad) console.log(`\n0  ${bad} failed. ${coverage}\n`);
 else if (grey) console.log(`\nu  nothing failed, and not everything was looked at. ${coverage}\n`);
 else console.log(`\n1  the listed runtimes agree on this finite table. ${coverage}\n`);

@@ -22,6 +22,10 @@ Not checked says what was not, and the one thing that would settle it.
   1 only when every one says 1, 0 only when every one says 0, u otherwise: the U2-byte's rule, never a vote. A
   disagreement is a reason naming who said what. `settle(formula, settlers)` asks every settler each question;
   a settler that throws or answers with a bare u is heard as u. U holds no settler of its own.
+- [W] Who answered (`by` on every value in `why.js`): `settle` names each answer as "witness: question"; a face rests
+  on the answers its `by` names and the questions its reasons name, and on nothing else (checked against every
+  table of answers). `why.py`, the Python port, gives the same answers as `why.js`, byte for byte, over 4068
+  formulas, in `verify.mjs`. Not checked: the shell port carries no reasons.
 - [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
   Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
   Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit
