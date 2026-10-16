@@ -10,6 +10,11 @@ Not checked says what was not, and the one thing that would settle it.
 
 ### Added
 
+- [W] Reasons that travel (`why.js`, export `./why`): a u keeps the sentence that would settle it through `not`,
+  `and` and `or`. Two u's keep both reasons, in order, once each; a settled answer keeps none. No reason that some
+  combination of answers could need is ever dropped (every formula to depth 2, 7320 of them, and 3000 sampled at
+  depth 4, checked against every answer); one step keeps exactly the u's that could change it. Faces are u's own.
+  Not checked: the Python and shell ports do not carry reasons yet.
 - [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
   Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
   Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit

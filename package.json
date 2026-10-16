@@ -13,6 +13,7 @@
     "./u5": "./u5.js",
     "./u6": "./u6.js",
     "./u-byte": "./u-byte.js",
+    "./why": "./why.js",
     "./fish": "./fish.js",
     "./fish-fractal": "./fish-fractal.js"
   },
