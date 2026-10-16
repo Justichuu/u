@@ -60,15 +60,15 @@ export const settled = a => { const x = value(a); return said(x.face === "u" ? "
 // Witnesses, many working as one. Justichuu, 16 Oct 2026: "consider 3 things working that are one thing but 3 things
 // independently could be u". Each witness's value, by name: the one answer is 1 only when every witness says 1, 0 only
 // when every one says 0, and u otherwise, the U2-byte's rule ("U until all three agree") with any witness free to be
-// u. Never a vote: a majority would turn a disagreement into a guess. A disagreement is a reason of its own, naming who
-// said what; a u witness's reasons stay; a witness that can still change keeps its reasons.
+// u. Never a vote: a majority would turn a disagreement into a guess. When the answer is u and any witness did answer,
+// who said what is a reason of its own; a u witness's reasons stay; a witness that can still change keeps its reasons.
 export const witnesses = (saidBy, about) => {
   const names = Object.keys(saidBy);
   if (!names.length) throw new TypeError("witnesses need at least one witness, by name");
   const heard = names.map(n => value(saidBy[n]));
   const every = f => heard.reduce((all, x) => andFace(all, f(x.face)), "1");
   const face = every(f => f) === "1" ? "1" : every(notFace) === "1" ? "0" : u("the witnesses do not agree yet");
-  const split = ["1", "0"].every(f => heard.some(x => x.face === f));
+  const split = face === "u" && heard.some(x => x.face !== "u");   // u, and someone did answer: say who said what
   const why = [...new Set([...(split ? [names.map((n, i) => `${n} says ${heard[i].face}`).join(", ")] : []),
     ...heard.flatMap(x => x.why)])];
   const by = union(names.map(n => (about === undefined ? n : `${n}: ${about}`)), ...heard.map(x => x.by));

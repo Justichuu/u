@@ -185,7 +185,7 @@ test('a disagreement names who said what; a u witness keeps its reasons; agreein
   assert.deepEqual(why.witnesses({iDoMath: why.known('1'), sensor: why.known('0'), person: why.known('1')}),
     {face: 'u', why: ['iDoMath says 1, sensor says 0, person says 1'], by: ['iDoMath', 'sensor', 'person']});
   assert.deepEqual(why.witnesses({iDoMath: why.known('1'), sensor: why.unknown('is the sensor plugged in?'), person: why.known('1')}),
-    {face: 'u', why: ['is the sensor plugged in?'], by: ['iDoMath', 'sensor', 'person']});
+    {face: 'u', why: ['iDoMath says 1, sensor says u, person says 1', 'is the sensor plugged in?'], by: ['iDoMath', 'sensor', 'person']});
   assert.deepEqual(why.witnesses({iDoMath: why.known('0'), sensor: why.known('0'), person: why.known('0')}), {face: '0', why: [], by: ['iDoMath', 'sensor', 'person']});
   assert.throws(() => why.witnesses({}), /at least one witness/);
 });
@@ -211,10 +211,10 @@ test('settle asks every settler each question; a throw or a bare u is heard as u
   assert.deepEqual(door, {face: 'u', why: ['is the door locked?', 'no way to check "is the door locked?"'],
     by: ['iDoMath: 2+2 = 4', 'person: 2+2 = 4', 'iDoMath: is the door locked?', 'person: is the door locked?']});
   const throws = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, sensor: () => { throw new Error('unplugged'); }});
-  assert.deepEqual(throws, {face: 'u', why: ['2+2 = 4', 'sensor did not answer "2+2 = 4": unplugged'], by: ['iDoMath: 2+2 = 4', 'sensor: 2+2 = 4']});
+  assert.deepEqual(throws, {face: 'u', why: ['2+2 = 4', 'iDoMath says 1, sensor says u', 'sensor did not answer "2+2 = 4": unplugged'], by: ['iDoMath: 2+2 = 4', 'sensor: 2+2 = 4']});
   const bare = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: () => ({face: 'u', why: []})});
   assert.equal(bare.face, 'u');
-  assert.match(bare.why[1], /person did not answer "2\+2 = 4": a value is/);
+  assert.match(bare.why[2], /person did not answer "2\+2 = 4": a value is/);
   const split = why.settle(ask => ask('2+2 = 4'), {iDoMath: sure, person: () => why.known('0')});
   assert.deepEqual(split, {face: 'u', why: ['2+2 = 4', 'iDoMath says 1, person says 0'], by: ['iDoMath: 2+2 = 4', 'person: 2+2 = 4']});
   assert.throws(() => why.settle(ask => ask(''), {iDoMath: sure}), /names the one observation/);

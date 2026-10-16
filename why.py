@@ -7,11 +7,23 @@ verify.mjs runs both ports over the same formulas and compares what they print, 
 
     python why.py < formulas.json    prints each formula's answer as JSON, as `node why.js` does
 """
+import importlib.util
 import json
 import sys
+from pathlib import Path
 from typing import NamedTuple
 
-from u import FACES, and_ as _and, not_ as _not, or_ as _or, u
+
+def _faces():
+    """u.py beside this file, by its path: a program that loads why.py from elsewhere gets this u, never another."""
+    spec = importlib.util.spec_from_file_location("u_faces", Path(__file__).with_name("u.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_U = _faces()
+FACES, _and, _not, _or, u = _U.FACES, _U.and_, _U.not_, _U.or_, _U.u
 
 
 class Said(NamedTuple):
@@ -93,7 +105,7 @@ def witnesses(said_by, about=None):
         return all_
 
     face = "1" if every(lambda f: f) == "1" else "0" if every(_not) == "1" else u("the witnesses do not agree yet")
-    split = all(any(x.face == f for x in heard) for f in ("1", "0"))
+    split = face == "u" and any(x.face != "u" for x in heard)   # u, and someone did answer: say who said what
     why = _union([", ".join(f"{n} says {x.face}" for n, x in zip(names, heard))] if split else [],
                  *(x.why for x in heard))
     by = _union([n if about is None else f"{n}: {about}" for n in names], *(x.by for x in heard))
