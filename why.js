@@ -26,6 +26,7 @@ export const unknown = why => said(u(why), [why]);   // u() refuses a reason tha
 const value = x => {
   if (!x || !faces.includes(x.face) || !Array.isArray(x.why) || (x.face === "u") !== (x.why.length > 0))
     throw new TypeError("a value is known(1 or 0) or unknown(reason)");
+  x.why.forEach(reason => u(reason));   // each reason passes u's own refusal of a u that names nothing
   return x;
 };
 

@@ -105,6 +105,8 @@ test('a u with no reason, or a value with its reasons torn off, is refused', () 
   assert.throws(() => why.not({face: 'u', why: []}), /a value is/);
   assert.throws(() => why.and(why.known('1'), {face: '1', why: ['stray']}), /a value is/);
   assert.throws(() => why.known('u'), /a known value/);
+  assert.throws(() => why.not({face: 'u', why: ['']}), /names the one observation/);   // a bare u made by hand
+  assert.throws(() => why.or({face: 'u', why: [42]}, why.known('0')), /names the one observation/);
 });
 
 test('why.js is built only on u: it imports u and writes no table of its own', () => {
