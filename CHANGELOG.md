@@ -18,6 +18,10 @@ Not checked says what was not, and the one thing that would settle it.
 - [W] Is it settled? (`settled` in `why.js`): asked of the knowing, not the value: 1 when a value is 1 or 0, 0 when
   it is u, never u. u's not, and and or build 197 of the 19683 rules over two inputs; with `settled` they build all
   19683 (both counted by the tests). It keeps what would change it, so a 1 or 0 with reasons is known now, not final.
+- [W] Witnesses (`witnesses` in `why.js`): several named witnesses working as one answer, any of them free to be u.
+  1 only when every one says 1, 0 only when every one says 0, u otherwise: the U2-byte's rule, never a vote. A
+  disagreement is a reason naming who said what. `settle(formula, settlers)` asks every settler each question;
+  a settler that throws or answers with a bare u is heard as u. U holds no settler of its own.
 - [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
   Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
   Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit
