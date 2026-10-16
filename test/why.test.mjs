@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import * as face from '../u.js';
 import * as why from '../why.js';
 import {agree} from '../u2.js';
@@ -260,4 +261,16 @@ test('a witness is named by a sentence, and a settler\'s answer may come without
   assert.throws(() => why.known('1', ''), /a witness is named/);
   assert.throws(() => why.not({face: '1', why: [], by: ['']}), /a value is/);
   assert.deepEqual(why.settle(ask => ask('2+2 = 4'), {iDoMath: () => ({face: '1', why: []})}).by, ['iDoMath: 2+2 = 4']);
+});
+
+test('both ports read formulas that start with a byte-order mark, as a Windows pipe sends them', () => {
+  const input = '\uFEFF' + JSON.stringify([['and', 'door', '1'], ['witnesses', {iDoMath: '1', sensor: '0'}]]);
+  const want = JSON.stringify([{face: 'u', why: ['door'], by: []}, {face: 'u', why: ['iDoMath says 1, sensor says 0'], by: ['iDoMath', 'sensor']}]);
+  const here = new URL('..', import.meta.url);
+  assert.equal(execFileSync(process.execPath, ['why.js'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
+  let python = null;
+  for (const cmd of [process.env.U_PYTHON, 'python3', 'python'].filter(Boolean)) {
+    try { execFileSync(cmd, ['--version'], {stdio: 'ignore'}); python = cmd; break; } catch {}
+  }
+  if (python) assert.equal(execFileSync(python, ['why.py'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
 });

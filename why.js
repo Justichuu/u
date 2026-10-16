@@ -99,4 +99,4 @@ export const answer = f => typeof f === "string" ? (f === "1" || f === "0" ? kno
   : ({ and, or })[f[0]](answer(f[1]), answer(f[2]));
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
-  console.log(JSON.stringify(JSON.parse(readFileSync(0, "utf8")).map(answer)));
+  console.log(JSON.stringify(JSON.parse(readFileSync(0, "utf8").replace(/^\uFEFF/, "")).map(answer)));   // a pipe may lead with a BOM

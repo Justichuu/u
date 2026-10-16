@@ -140,4 +140,5 @@ def answer(f):
 
 
 if __name__ == "__main__":
-    print(json.dumps([answer(f).plain() for f in json.load(sys.stdin)], ensure_ascii=False, separators=(",", ":")))
+    formulas = json.loads(sys.stdin.buffer.read().decode("utf-8-sig"))   # a pipe may lead with a BOM
+    print(json.dumps([answer(f).plain() for f in formulas], ensure_ascii=False, separators=(",", ":")))
