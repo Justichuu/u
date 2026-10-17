@@ -46,7 +46,7 @@ class U(str):
     """A face as a Python value. U(True) is 1, U(False) is 0, U(None, why) is u: Python's None stands for u, and still
     says what would settle it. & | ~ are and, or and not above; bool() of 1 or 0 is True or False, and of u refuses,
     as SQL's unknown is never taken for true or false. .python() gives True, False or None back.
-    His words, 10 Oct 2026: "make my 3 value in python true", "it uses pythons none", "but we can use none to map to
+    Justichuu's words, 10 Oct 2026: "make my 3 value in python true", "it uses pythons none", "but we can use none to map to
     u?", "make our own", "use a custom class"."""
 
     def __new__(cls, value, why=None):
@@ -76,7 +76,7 @@ class U(str):
         return None if self == "u" else self == "1"
 
 
-# Every face the device can show, in the order he says them.
+# Every face the device can show, in the order Justichuu says them.
 FACES = ("1", "0", "u")
 
 

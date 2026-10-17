@@ -13,8 +13,6 @@
 // u). IEEE 754's NaN may carry a payload, but the standard does not promise it survives an operation, nor which of two
 // payloads wins; here both survive. Faces come from u's own not, and and or; this file holds no table of its own.
 
-import { readFileSync } from "node:fs";
-import { pathToFileURL } from "node:url";
 import { u, not as notFace, and as andFace, or as orFace, faces } from "./u.js";
 
 const said = (face, why, by = []) => Object.freeze({ face, why: Object.freeze(why), by: Object.freeze(by) });
@@ -91,12 +89,9 @@ export const settle = (formula, settlers) => formula(question => {
 });
 
 // A formula as JSON, read the same way by why.py: "1" or "0" known, any other string a question left u,
-// ["not"|"settled", f], ["and"|"or", f, g], ["witnesses", {name: f, ...}]. verify.mjs gives both ports one list and
-// compares what they print, byte for byte.
+// ["not"|"settled", f], ["and"|"or", f, g], ["witnesses", {name: f, ...}]. why-cli.mjs reads a list of them from
+// stdin; verify.mjs gives it and why.py one list and compares what they print, byte for byte.
 export const answer = f => typeof f === "string" ? (f === "1" || f === "0" ? known(f) : unknown(f))
   : f[0] === "witnesses" ? witnesses(Object.fromEntries(Object.entries(f[1]).map(([n, g]) => [n, answer(g)])))
   : f[0] === "not" || f[0] === "settled" ? ({ not, settled })[f[0]](answer(f[1]))
   : ({ and, or })[f[0]](answer(f[1]), answer(f[2]));
-
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
-  console.log(JSON.stringify(JSON.parse(readFileSync(0, "utf8").replace(/^\uFEFF/, "")).map(answer)));   // a pipe may lead with a BOM

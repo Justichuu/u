@@ -267,10 +267,16 @@ test('both ports read formulas that start with a byte-order mark, as a Windows p
   const input = '\uFEFF' + JSON.stringify([['and', 'door', '1'], ['witnesses', {iDoMath: '1', sensor: '0'}]]);
   const want = JSON.stringify([{face: 'u', why: ['door'], by: []}, {face: 'u', why: ['iDoMath says 1, sensor says 0'], by: ['iDoMath', 'sensor']}]);
   const here = new URL('..', import.meta.url);
-  assert.equal(execFileSync(process.execPath, ['why.js'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
+  assert.equal(execFileSync(process.execPath, ['why-cli.mjs'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
   let python = null;
   for (const cmd of [process.env.U_PYTHON, 'python3', 'python'].filter(Boolean)) {
     try { execFileSync(cmd, ['--version'], {stdio: 'ignore'}); python = cmd; break; } catch {}
   }
   if (python) assert.equal(execFileSync(python, ['why.py'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
+});
+
+test('why.js imports only u.js, so it runs in a browser; its command line lives in why-cli.mjs', () => {
+  const src = readFileSync(new URL('../why.js', import.meta.url), 'utf8');
+  assert.deepEqual(src.match(/^import .* from "([^"]+)";$/gm).map(l => l.match(/from "([^"]+)"/)[1]), ['./u.js']);
+  assert.doesNotMatch(src, /process\.|node:/);
 });

@@ -29,7 +29,7 @@ for (const [by, n, streams, values, placements] of [['whole', 5, 672, 32, 21], [
   });
 }
 
-test('his two strings, 9 October 2026', () => {
+test('Justichuu\'s two strings, 9 October 2026', () => {
   assert.deepEqual(bytes('1u1001uu', 'whole'), {bytes: ['1u1001uu'], open: ''});
   assert.deepEqual(bytes('1u1001uu', 'every'), {bytes: [], open: '1u1001uu'});
   for (const by of ['whole', 'every']) assert.deepEqual(bytes('1111100001001uuu', by).bytes, ['1111100001001uuu']);

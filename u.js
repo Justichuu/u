@@ -22,7 +22,7 @@ export const not = a => { face(a); return a === "u" ? "u" : a === "1" ? "0" : "1
 export const and = (a, b) => { face(a); face(b); return a === "0" || b === "0" ? "0" : a === "u" || b === "u" ? "u" : "1"; };
 export const or = (a, b) => { face(a); face(b); return a === "1" || b === "1" ? "1" : a === "u" || b === "u" ? "u" : "0"; };
 
-// Every face the device can show, in the order he says them.
+// Every face the device can show, in the order Justichuu says them.
 export const faces = ["1", "0", "u"];
 
 // This finite tape records not over each face,

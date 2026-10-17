@@ -118,6 +118,47 @@ mirror(u6('chuu', '1'));                  // ['chau', '1']
 and6(u6('chau', '1'), u6('chau', 'u'));   // ['chau', 'u']
 ```
 
+## u-bytes
+
+Justichuu, 9 October 2026: "3 us in sequence is the bite", "So bit depth = u but definable". A u-byte is
+a run of 1, 0 and u that closes on a third u: by `whole` the third u anywhere closes it, by `every`
+three u's side by side do. Each u-byte is two parts, the bits between the u's and where the u's are
+set, and rebuilds from them exactly. A run not yet closed is left open, never guessed shut.
+
+```js
+import {bytes, split, join} from './u-byte.js';
+bytes([...'10u1u0u1']);  // {bytes: ['10u1u0u'], open: '1'}
+split('10u1u0u');        // {bits: '1010', at: [2, 4, 6]}
+```
+
+## Reasons that travel
+
+Justichuu, 16 October 2026: "I want to make U the best", then "Sure, start with reasons". A u names
+the one observation that would settle it, and `why.js` keeps that through every step. A value is its
+face, its reasons (the questions that could still change it) and `by` (who answered).
+
+- `known(face, by)` and `unknown(reason)` make a 1 or 0, or a u with the question that settles it.
+- `not`, `and` and `or` give u's own faces and keep each reason any answer could still need.
+- `settled(x)` asks of the knowing, not the value: 1 when x is 1 or 0, 0 when it is u, never u.
+  With it, u's operations build every two-input rule over 1, 0 and u (all 19,683; without it, 197).
+- `witnesses({name: value, ...})` makes many checkers one answer: 1 or 0 only when all agree,
+  otherwise u, naming who said what. Never a vote: a majority turns a disagreement into a guess.
+- `settle(formula, settlers)` asks every settler each question; one that throws is heard as u.
+
+```js
+import {known, unknown, and, settled, witnesses} from './why.js';
+and(unknown('is the door locked?'), known('1'));   // {face: 'u', why: ['is the door locked?'], by: []}
+settled(unknown('is the door locked?'));           // {face: '0', why: ['is the door locked?'], by: []}
+witnesses({exact: known('1'), float: known('0')});  // {face: 'u', why: ['exact says 1, float says 0'], by: ['exact', 'float']}
+```
+
+`why.py` is the same in Python, and `why-cli.mjs` reads formulas as JSON on stdin; `verify.mjs`
+checks that the two ports give byte-identical answers. The checkers are assumed to fail
+independently: three that share a blind spot agree on it.
+
+In Python, `u.py`'s class `U` is a face as a value: `U(True)` is 1, `U(False)` is 0, `U(None, why)`
+is u with its reason, `& | ~` are and, or and not, and `bool()` of a u refuses.
+
 ## Optional: use the logic in your own code
 
 ```js

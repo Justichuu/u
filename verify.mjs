@@ -66,7 +66,7 @@ const grow = ps => [...ps.flatMap(p => [["not", p], ["settled", p]]), ...ps.flat
 const level1 = [...atoms, ...grow(atoms)];
 const formulas = [...level1, ...grow(level1), ...atoms.flatMap(a => atoms.flatMap(b => atoms.map(c => ["witnesses", { first: a, second: b, third: c }])))];
 const heard = [];
-for (const [name, [cmd, args]] of [["why.js  node", [process.execPath, ["why.js"]]], ["why.py  python", [ports[1][1][0], ["why.py"]]]]) {
+for (const [name, [cmd, args]] of [["why.js  node", [process.execPath, ["why-cli.mjs"]]], ["why.py  python", [ports[1][1][0], ["why.py"]]]]) {
   try {
     heard.push(execFileSync(cmd, args, { cwd, input: JSON.stringify(formulas), encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim());
   } catch (err) {

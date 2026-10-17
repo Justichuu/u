@@ -2,7 +2,7 @@
 // system called U2-bytes", and before it, "It just needed 3 witnesses in the bits to form a singular smaller byte."
 //
 // A U2-byte holds three witnesses: two bits that say 1 or 0, and one u-bit that may also say u. Its face is 1 only when all
-// three say 1, 0 only when all three say 0, and u until they agree (his Z: "U until all three agree"). Every face below
+// three say 1, 0 only when all three say 0, and u until they agree (Justichuu's Z: "U until all three agree"). Every face below
 // comes from u's own not, and, or and u(); this file holds no table of its own.
 //
 // It packs into four bits, a byte smaller than a byte: bit, bit, then the u-bit in two bits.
