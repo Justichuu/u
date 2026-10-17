@@ -40,7 +40,7 @@ const burned =
       .filter(line => !line.trim().startsWith("//"))
       .join("\n")
       .replace(/^import .*$/m, "")
-      .replace(/^if \(process\.argv\[1\][\s\S]*$/m, "")
+      .replace(/^if \(globalThis\.process\?\.argv\?\.\[1\]\)[\s\S]*$/m, "")   // the program block, with its own node:url
       .replace(/\bexport \b/g, "")
   ) + "\nconsole.log(q5());\n";
 

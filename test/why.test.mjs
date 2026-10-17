@@ -275,8 +275,11 @@ test('both ports read formulas that start with a byte-order mark, as a Windows p
   if (python) assert.equal(execFileSync(python, ['why.py'], {cwd: here, input, encoding: 'utf8'}).trim(), want);
 });
 
-test('why.js imports only u.js, so it runs in a browser; its command line lives in why-cli.mjs', () => {
+test('why.js imports only u.js, and u.js loads nothing of Node\'s unless run as a program, so both run in a browser', () => {
   const src = readFileSync(new URL('../why.js', import.meta.url), 'utf8');
   assert.deepEqual(src.match(/^import .* from "([^"]+)";$/gm).map(l => l.match(/from "([^"]+)"/)[1]), ['./u.js']);
   assert.doesNotMatch(src, /process\.|node:/);
+  const u = readFileSync(new URL('../u.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(u, /^import /m);   // no static import at all
+  assert.ok(u.indexOf('import("node:url")') > u.indexOf('if (globalThis.process?.argv?.[1])'), 'node:url only inside the program guard');
 });

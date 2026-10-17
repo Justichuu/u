@@ -9,7 +9,7 @@ for(let i=0;i<args.length;i++){
 }
 const read=name=>readFileSync(new URL(name,import.meta.url),'utf8');
 const source=read('u.js');
-const logic=source.slice(0,source.indexOf('\nif (process.argv[1]')).replace(/^import .*$/m,'').replace(/^export /gm,'');
+const logic=source.slice(0,source.indexOf('\n// Run as a program')).replace(/^import .*$/m,'').replace(/^export /gm,'');
 if(!logic.includes('const KNOWN')||logic.includes('node:url'))throw Error('Review the logic entry point before bundling.');
 const protocol=read('u.mjs').replace(/^export /gm,'');
 const fishSource=read('fish.js');
