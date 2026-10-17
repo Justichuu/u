@@ -41,7 +41,8 @@ Not checked says what was not, and the one thing that would settle it.
 
 ### Changed
 
-- [W] `why.js` imports only `u.js`, so it runs in a browser; its stdin command line is `why-cli.mjs`.
+- [W] `u.js` loads Node's `node:url` only when run as a program, and `why.js` imports only `u.js`, so both import
+  in a browser (seen in Chromium); `why.js`'s stdin command line is `why-cli.mjs`.
 - [W] Public text names Justichuu instead of using pronouns (`u.js`, `u.py`, `u2.js`, `run.html`). Comments only;
   the tape is unchanged.
 
