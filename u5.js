@@ -23,7 +23,7 @@ export const toU5 = n => {
 // Five u-bits back to the number they hold.
 export const fromU5 = digits => {
   if (!Array.isArray(digits) || digits.length !== 5) throw new TypeError("a U5-byte is five u-bits");
-  return digits.reduce((n, d) => { if (!(d in VALUE)) throw new TypeError("a u-bit says 0, 1 or u"); return n * 3 + VALUE[d]; }, 0);
+  return digits.reduce((n, d) => { if (!faces.includes(d)) throw new TypeError("a u-bit says 0, 1 or u"); return n * 3 + VALUE[d]; }, 0);
 };
 
 // Stored in one eight-bit byte; read back, a byte above 242 says it changed.

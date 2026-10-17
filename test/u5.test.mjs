@@ -31,3 +31,7 @@ test('it refuses what is not a U5-byte instead of guessing', () => {
   assert.throws(() => fromU5(['0', '1', '2', '0', '0']), TypeError);
   assert.throws(() => unpack(256), RangeError);
 });
+
+test('a u-bit is one of u\'s faces, never an inherited name or a look-alike (the clone of audit Q030)', () => {
+  for (const d of ['toString', 'constructor', ['1'], 1, null]) assert.throws(() => fromU5([d, '0', '0', '0', '0']), /u-bit says/);
+});

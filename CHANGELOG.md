@@ -8,6 +8,48 @@ Not checked says what was not, and the one thing that would settle it.
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-17
+
+### Added
+
+- [W] Reasons that travel (`why.js`, export `./why`): a u keeps the sentence that would settle it through `not`,
+  `and` and `or`. Two u's keep both reasons, in order, once each; a settled answer keeps none. No reason that some
+  combination of answers could need is ever dropped (every formula to depth 2, 7320 of them, and 3000 sampled at
+  depth 4, checked against every answer); one step keeps exactly the u's that could change it. Faces are u's own.
+  Not checked: the shell port carries no reasons.
+- [W] Is it settled? (`settled` in `why.js`): asked of the knowing, not the value: 1 when a value is 1 or 0, 0 when
+  it is u, never u. u's not, and and or build 197 of the 19683 rules over two inputs; with `settled` they build all
+  19683 (both counted by the tests). It keeps what would change it, so a 1 or 0 with reasons is known now, not final.
+- [W] Witnesses (`witnesses` in `why.js`): several named witnesses working as one answer, any of them free to be u.
+  1 only when every one says 1, 0 only when every one says 0, u otherwise: the U2-byte's rule, never a vote. A
+  disagreement is a reason naming who said what. `settle(formula, settlers)` asks every settler each question;
+  a settler that throws or answers with a bare u is heard as u. U holds no settler of its own.
+- [W] Who answered (`by` on every value in `why.js`): `settle` names each answer as "witness: question"; a face rests
+  on the answers its `by` names and the questions its reasons name, and on nothing else (checked against every
+  table of answers). `why.py`, the Python port, gives the same answers as `why.js`, byte for byte, over 4068
+  formulas, in `verify.mjs`. Not checked: the shell port carries no reasons.
+- [W] u-bytes (`u-byte.js`, export `./u-byte`): a run of 1, 0 and u that closes on a third u, with a depth you set.
+  Each u-byte is two parts, the bits between the u's and where the u's are set, and rebuilds from them exactly.
+  Two ways to close, both kept: `whole` (the third u anywhere) and `every` (three u side by side, so each bit
+  carries none, one or two u in front of it). Counted over every stream on 9 October 2026: 5 bits make 672
+  u-bytes by `whole` (32 bit values times 21 placements), 4 bits make 1296 by `every` (16 times 81);
+  `test/u-byte.test.mjs` keeps those counts. Built on u.js; no table of its own.
+- [W] U6 (`u6.js`, export `./u6`): two 3-value logics, the halves `chuu` and `chau`, each with u's faces, make six
+  values; the mirror swaps the half and keeps the face; not, and and or are u's own inside one half. Built on u.js.
+- [W] U in Python (`u.py`, class `U`): `U(True)` is 1, `U(False)` is 0, `U(None, why)` is u and still names what would
+  settle it; `& | ~` are u's own and, or and not; `bool()` of u refuses, as SQL's unknown is never true or false.
+
+### Changed
+
+- [W] `why.js` imports only `u.js`, so it runs in a browser; its stdin command line is `why-cli.mjs`.
+- [W] Public text names Justichuu instead of using pronouns (`u.js`, `u.py`, `u2.js`, `run.html`). Comments only;
+  the tape is unchanged.
+
+### Fixed
+
+- [W] A u-bit is one of u's faces: U2's `pack` and U5's reader refused nothing that merely looked like one, so an
+  inherited name such as `toString` packed as u and `["1"]` packed as a true witness. Both now ask u's own faces.
+
 ## [1.3.3] - 2026-10-08
 
 ### Fixed
